@@ -1,54 +1,55 @@
 <template>
       <el-row class="home"  :gutter="20">
         <!-- 左边显示用户信息 -->
-        <el-col :span="8">
+        <el-col id="home-left" :span="8">
           <el-card shadow="hover"  style="margin-bottom:20px">
-            <div class="user">
+            <div class="user-info">
               <img :src="userImg">
-              <div class="user-info">
-                <p class="name">Nick</p>
-                <p class="access">超级管理员</p>
-              </div>
-            </div>
-            <div class="login-info">
-              <p>上次登陆时间：<span>2020/10/19</span></p>
-              <p>上次登录地点：<span>广州</span></p>
+              <p class="user-name">大秋</p>
+              <p class="user-access">管理员</p>
+              <div id="login-container">
+                <div class="login-info">
+                  <p>上次登陆时间：<span>2020/11/17</span></p>
+                  <p>上次登录地点： <span>广州</span></p>
+                </div> 
+              </div>    
             </div>
           </el-card>
-          <el-card shadow="hover" body-style="height: 460px">
+          <el-card shadow="hover" id="left-bottom">
               <el-table :data="tableData">
-                <el-table-column show-overflow-tooltip
-                v-for="(val,key) in tableLabel" 
-                :key="key" :prop="key" 
-                :label="val"></el-table-column>
+                <el-table-column show-overflow-tooltip align="center"
+                  v-for="(val,key) in tableLabel" 
+                  :key="key" :prop="key" 
+                  :label="val">
+                </el-table-column>
               </el-table>
           </el-card>
         </el-col>
         <!-- 右边显示数据 -->
-        <el-col :span="16">
-            <!-- 今日支付订单 -->
+        <el-col id="home-right" :span="16">
             <div class="right-top">
-                <el-card shadow="hover" v-for="item in countData" :key="item.name">
+                <el-card shadow="hover" v-for="item in rightTopData" :key="item.name">
                   <i class="icon" :class="item.icon" :style="{background:item.color}"></i>
                   <div class="detail">
-                    {{ item.name }}人数：{{ item.value }}
+                    {{ item.name }}{{ item.value }}
                   </div>
               </el-card>
             </div>
-          <!-- 课程购买图表 -->
-          <el-card shadow="hover" body-style="height: 320px">
-              <echart :chartData="echartData.order"></echart>
+          <!-- ECharts组件展示 -->
+          <div class="right-middle">
+            <el-card id="home-echart" shadow="hover"  body-style="height: 320px" >
+              <echart :chartData="echartData.order" :v-loading="loading"></echart>
           </el-card>
+          </div>
           <!-- 用户活跃图表 -->
           <div class="right-bottom">
-              <el-card shadow="hover" body-style="height: 300px">
+              <el-card shadow="hover">
                 <echart></echart>
               </el-card>
-              <el-card shadow="hover" body-style="height: 300px">
+              <el-card shadow="hover">
                 <echart></echart>
               </el-card>
               </div>
-            
         </el-col>
       </el-row>
 </template>
@@ -61,21 +62,22 @@ export default {
   },
   data() {
     return {
+      loading: true,
       userImg: require('../assets/images/user.jpg'),
-      countData: [
-        { name: '今日浏览',value: '1234',icon: 'el-icon-star-on',color: '#409eff' },
-        { name: '今日收藏',value: '123',icon: 'el-icon-star-on',color: '#409eff' },
-        { name: '今日支付',value: '12',icon: 'el-icon-star-on',color: '#409eff' },
-        { name: '昨日浏览',value: '4321',icon: 'el-icon-star-on',color: '#409eff' },
-        { name: '昨日收藏',value: '432',icon: 'el-icon-star-on',color: '#409eff' },
-        { name: '昨日支付',value: '43',icon: 'el-icon-star-on',color: '#409eff' },
+      rightTopData: [
+        { name: '文章数：',value: '12',icon: 'el-icon-star-on',color: '#409eff' },
+        { name: '关注数：',value: '3',icon: 'el-icon-star-on',color: '#409eff' },
+        { name: '粉丝数：',value: '120',icon: 'el-icon-star-on',color: '#409eff' },
+        { name: '阅读量：',value: '1721',icon: 'el-icon-star-on',color: '#409eff' },
+        { name: '点赞量：',value: '432',icon: 'el-icon-star-on',color: '#409eff' },
+        { name: '评论量：',value: '843',icon: 'el-icon-star-on',color: '#409eff' },
       ],
       tableData: [],
       tableLabel: {
-        name: '课程名',
-        todayBuy: '今日购买',
-        monthBuy: '本月购买',
-        totalBuy: '总购买'
+        id: '编号',
+        name: '书名',
+        author: '作者',
+        price: '价格',
       },
       echartData: {
         order: {
@@ -96,10 +98,8 @@ export default {
     getTableData() {
     this.$http.get('/home/getData').then(res => {
         res = res.data
-        this.tableData = res.data.tableData
-        // 订单折线图
         const order = res.data.orderData
-        this.echartData.order.xData = order.data
+        this.echartData.order.xData = order.date
         // 第一步：取出series中的name部分-->键名
         let keyArray = Object.keys(order.data[0])
         keyArray.forEach(key => {
@@ -109,11 +109,18 @@ export default {
             type: 'line'
           })
         })
+        this.loading = "false"
       })
     }
   },
   created() {
-    this.getTableData()
+    this.getTableData();
+    const _this = this;
+    _this.$http.get('http://localhost:8181/booklist/findAll').then((res) => {
+        console.log(res);
+        _this.tableData = res.data;
+        
+    }) 
   }
 }
 </script>

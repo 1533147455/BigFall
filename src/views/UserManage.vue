@@ -41,10 +41,10 @@ export default {
       ],
       tableData: [],
       tableLabel: [
-        { prop: 'name', label: '姓名'},
-        { prop: 'age', label: '年龄'},
-        { prop: 'sexLabel', label: '性别'},
-        { prop: 'birth', label: '出生日期'},
+        { prop: 'name', label: '姓名',width: 180},
+        { prop: 'age', label: '年龄',width: 180},
+        { prop: 'sexLabel', label: '性别',width: 180},
+        { prop: 'birth', label: '出生日期',width: 180},
         { prop: 'addr', label: '地址'}
       ],
       config: { page: 1, total: 30,loading: false }

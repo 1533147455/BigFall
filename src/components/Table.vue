@@ -8,9 +8,10 @@
     >
       <el-table-column
         label="序号"
-        width="85">
+        width="85"
+        align="center">
       <template slot-scope="scope">
-        <span style="margin-left: 10px">{{ (config.page - 1) * 20 + scope.$index + 1 }}</span>
+        <span>{{ (config.page - 1) * 20 + scope.$index + 1 }}</span>
       </template>
     </el-table-column>
     <el-table-column 
@@ -19,10 +20,10 @@
     :prop="item.prop"
     :label="item.label"
     show-overflow-tooltip
-    :width="item.width ? item.width : 200"
+    :width="item.width ? item.width : 280"
     >
       <template slot-scope="scope">
-        <span style="margin-left: 10px">{{ scope.row[item.prop] }}</span>
+        <span>{{ scope.row[item.prop] }}</span>
       </template>
     </el-table-column>
     </el-table>

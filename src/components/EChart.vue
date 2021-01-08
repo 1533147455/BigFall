@@ -1,6 +1,6 @@
 <template>
   <div style="height: 100%" ref="echart">
-      echart
+       <!-- v-loading="loading" -->
   </div>
 </template>
 
@@ -21,7 +21,8 @@ export default {
         isAxisChart: {
             type: Boolean,
             default: true
-        }
+        },
+        // loading: Boolean // 加载时转圈
     },
     computed: {
         ...mapState(['isCollapse']),
@@ -49,14 +50,9 @@ export default {
             //  有坐标轴的配置
             axisOption: {
                 xAxis: 
-                {
-                    type: 'category',
-                    data: []
-                },
-              yAxis: [
-                {
-                    type: 'value'
-                }
+                { type: 'category',data: [] },
+                yAxis: [
+                { type: 'value' }
               ],
               series: []
             },

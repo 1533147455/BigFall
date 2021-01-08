@@ -30,7 +30,7 @@ const routes = [
         path: '/others',
         name: 'others',
         component: () => import('@/views/Others/Page1.vue'),
-        meta: { title: '其它' },
+        meta: { title: '资源' },
         children: [
           {
             path: '/page1',

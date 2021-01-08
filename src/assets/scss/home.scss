@@ -1,78 +1,95 @@
 .home {
-    .user {
+    #home-left {
         display: flex;
-        align-items: center;
-        padding-bottom: 20px;
-        margin-bottom: 20px;
-        border-bottom: 1px solid #ccc;
-        img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            margin-right: 40px;
-        }
-        &-info { //相当于user-info
-            .name {
-                font-size: 32px;
-                margin-bottom: 10px;
-            }
-            .access {
-                color: #999
-            }
-
-        }
-    }
-    .login-info {
-        padding-left: 20px;
-        p {
-            line-height: 28px;
-            font-size: 14px;
-            color: #999;
-            span {
-                color: #666;
-                margin-left: 50px;
-            }
-        }
-    }
-    .right-top {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        
-        .el-card {
-            width: 30%;
-            margin-bottom: 20px;
-            /deep/ .el-card__body {
-                width: 100%;
-                display: flex;
-                // justify-content: space-between;
-                .icon {
-                    font-size: 30px;
-                    width: 80px;
-                    height: 80px;
-                    text-align: center;
-                    line-height: 80px;
-                    color: #fff;
-                }
-                .detail {
-                    margin-left: 15px;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                }
-            }
+        flex-direction: column;    
+        .user-info {
+            display: grid;
+            grid-template-columns: 40% 60%;
+            grid-template-rows: 35% 35% 30%;
+            grid-template-areas: 'a b'
+                                 'a c'
+                                 'd d';
            
-            
-            
+            img {
+                width: 150px;
+                height: 150px;
+                border-radius: 50%;
+                margin: 20px 40px;
+                grid-area: a;
+                
+            }
+            .user-name {
+                font-size: 32px;
+                grid-area: b;
+                justify-self: center;
+                align-self: end;
+                margin: 0;
+            }
+            .user-access {
+                color: #999;
+                margin-top: 12px;
+                grid-area: c;
+                justify-self: center;
+                align-self: start;
+            }
+            #login-container {
+                width: 100%;
+                grid-area: d;
+                border-top: 1px solid #ccc;
+                text-align: center;
+                .login-info {
+                    display: inline-block;
+                    text-align: left;
+                    p {
+                        line-height: 28px;
+                        font-size: 14px;
+                        color: #999;
+                        span {
+                            color: #666;
+                            margin-left: 50px;
+                        }
+                    }
+                }
+            }
         }
-       
+        
     }
-    .right-bottom {
+    
+    #home-right {
         display: flex;
-        justify-content: space-between;
-        margin-top: 20px;
-        .el-card {
-            width: 48%;
+        flex-direction: column;
+        .right-top {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            .el-card {
+                width: 30%;
+                margin-bottom: 20px;
+                /deep/ .el-card__body {
+                    width: 100%;
+                    display: flex;
+                    .icon {
+                        font-size: 30px;
+                        width: 60px;
+                        text-align: center;
+                        line-height: 60px;
+                        color: #fff;
+                    }
+                    .detail {
+                        margin-left: 30px;
+                        line-height: 60px;
+                    }
+                }   
+            }
+        }
+        .right-bottom {
+            height: 200px;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            .el-card {
+                width: 48%;
+            }
         }
     }
 }

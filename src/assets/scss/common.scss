@@ -1,16 +1,14 @@
 .manage{
-  height: 90%;
-  padding-bottom: 20px;
+  height: 685px;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
   .manage-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
   }
-  // .manage-content {
-  //   display: flex;
-  //   .common-table {
-  //     flex: 1;
-  //   }
-  // }
+  .manage-content {
+    overflow: auto;
+  }
 }
