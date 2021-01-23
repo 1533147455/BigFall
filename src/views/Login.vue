@@ -9,8 +9,10 @@
         </el-form-item>
         <el-form-item align="center">
             <el-button type="primary" @click="login()">登录</el-button>
+            <el-button @click="open">忘记密码</el-button>
         </el-form-item>
     </el-form>
+    
   </div>
 </template>
 
@@ -41,7 +43,12 @@ export default {
                     this.$message.warning(res.data.message)
                 }
             })
-        }
+        },
+        open() {
+            this.$alert('账号：root，密码：123123',  {
+            confirmButtonText: '好的',
+            });
+        },
     }
 }
 </script>
