@@ -1,11 +1,10 @@
 <template>
 <div class="common-table">
-  <el-table :data="tableData" 
+  <el-table
+    :data="tableData"
+    :height="height"
     style="width: 100%" 
-    stripe
-    :v-loading="config.loading"
-    fit
-    >
+    :v-loading="config.loading">
       <el-table-column
         label="序号"
         width="85"
@@ -15,19 +14,23 @@
       </template>
     </el-table-column>
     <el-table-column 
-    v-for="item in tableLabel" 
-    :key="item.prop"
-    :prop="item.prop"
-    :label="item.label"
-    show-overflow-tooltip
-    :width="item.width ? item.width : 280"
-    >
+      v-for="item in tableLabel"
+      :key="item.prop"
+      :prop="item.prop"
+      :label="item.label">
       <template slot-scope="scope">
         <span>{{ scope.row[item.prop] }}</span>
       </template>
     </el-table-column>
-    </el-table>
-
+  </el-table>
+  <el-pagination
+      :current-page.sync="config.page"
+      :page-size="10"
+      :page-sizes="[10, 20, 50, 100]"
+      layout="jumper, prev, pager, next, sizes"
+      :total="config.total"
+      @current-change="currentPageChange">
+  </el-pagination>
 </div>
     
 </template>
@@ -35,13 +38,22 @@
 <script>
 export default {
   props: {
-    tableData: Array,  // data对象数组，有prop键名、label列名和内容
+    tableData: Array,
     tableLabel: Array,
-    config: Object
+    config: Object,
+    height: Number,
+  },
+  methods: {
+    currentPageChange (page) {
+      this.$emit('currentPageChange', page);
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-
+.el-pagination {
+  text-align: right;
+  margin: 20px;
+}
 </style>

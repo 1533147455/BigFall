@@ -48,8 +48,8 @@ export default {
                         icon: 'el-icon-s-home'
                 },
                 {          
-                    path: '/resume',
-                    label: "简历",
+                    path: '/blog',
+                    label: "博客",
                     icon: 'el-icon-video-play',
                 },           
                 {                  

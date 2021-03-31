@@ -15,10 +15,10 @@ const routes = [
         meta: { title: '首页' }
       },
       {
-        path: '/resume',
-        name: 'resume',
-        component: () => import('@/views/Resume.vue'),
-        meta: { title: '简历' }
+        path: '/blog',
+        name: 'blog',
+        component: () => import('@/views/Blog.vue'),
+        meta: { title: '博客' }
       },
       {
         path: '/user',

@@ -100,7 +100,6 @@ export default {
         res = res.data
         const order = res.data.orderData
         this.echartData.order.xData = order.date
-        // 第一步：取出series中的name部分-->键名
         let keyArray = Object.keys(order.data[0])
         keyArray.forEach(key => {
           this.echartData.order.series.push({
@@ -126,5 +125,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~@/assets/scss/home.scss'
+@import '~@/assets/scss/home.scss';
 </style>

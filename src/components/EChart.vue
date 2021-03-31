@@ -1,6 +1,5 @@
 <template>
   <div style="height: 100%" ref="echart">
-       <!-- v-loading="loading" -->
   </div>
 </template>
 
@@ -22,7 +21,6 @@ export default {
             type: Boolean,
             default: true
         },
-        // loading: Boolean // 加载时转圈
     },
     computed: {
         ...mapState(['isCollapse']),
