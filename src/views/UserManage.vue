@@ -3,29 +3,38 @@
     <div class="manage-header">
       <common-form inline :form-items="formItems" :form="form">
         <template #button>
-          <el-button type="primary">查询</el-button>
+          <el-button type="primary">添加用户</el-button>
+          <el-button type="primary" @click="openDialog">批量删除</el-button>
         </template>
       </common-form>
+      <common-dialog ref="dialogDom" v-bind="dialogConfig"></common-dialog>
     </div>
     <div class="manage-content">
       <common-table
-        :height="528"
-        :tableData="tableData" 
-        :tableLabel="tableLabel" 
+        :height="658"
+        :tableData="tableData"
+        :tableColumns="tableColumns"
         :config="config"
-        @currentPageChange="currentPageChange">
+        @pageSizeChange="getTableData"
+        @currentPageChange="getTableData">
+        <template #operate="{row}">
+          <el-button @click="canm(row.id)" type="text" size="medium">查看</el-button>
+          <el-button type="text" size="medium">编辑</el-button>
+        </template>
       </common-table>
     </div>
   </div>
 </template>
 
 <script>
-import CommonForm from '../components/Form'
-import CommonTable from '../components/Table'
+import CommonForm from '../components/common/Form'
+import CommonTable from '../components/common/Table'
+import CommonDialog from '../components/common/Dialog'
 export default {
   components: {
     CommonForm,
-    CommonTable
+    CommonTable,
+    CommonDialog
   },
   data() {
     return {
@@ -50,49 +59,53 @@ export default {
           label: '食物'
         }
       ],
+      visible: false,
+      dialogConfig: {
+        title: '操作记录',
+        width: '432px',
+        certain: this.closeDialog
+      },
       tableData: [],
-      tableLabel: [
-        { prop: 'name', label: '姓名',width: 180},
-        { prop: 'age', label: '年龄',width: 180},
-        { prop: 'sexLabel', label: '性别',width: 180},
-        { prop: 'birth', label: '出生日期',width: 180},
-        { prop: 'addr', label: '地址'}
+      tableColumns: [
+        { prop: 'name', label: '姓名' },
+        { prop: 'age', label: '年龄' },
+        { prop: 'sexLabel', label: '性别' },
+        { prop: 'birth', label: '出生日期' },
+        { prop: 'addr', label: '地址' },
+        { prop: 'operate', label: '操作', slotName: 'operate',width: "150" }
       ],
-      config: { page: 1, total: 30, loading: false }
+      config: { currentPage: 1, pageSize: 10, loading: false }
     }
   },
   methods: {
-    getList() {
+    getTableData() {
       this.config.loading = true
       this.$http.get('/user/getUser', {
         params: {
-          page: this.config.page
+          currentPage: this.config.currentPage,
+          pageSize: this.config.pageSize
         }
       }).then(res => {
         this.tableData = res.data.list.map(item => {
           item.sexLabel = item.sex === 0 ? '女' : '男'
           return item
         })
-        this.config.total = res.data.count
+        this.config.total = res.data.total
         this.config.loading = false
       })
     },
-    currentPageChange(page) {
-      this.$http.get('/user/getUser', {
-        params: {
-          page
-        }.then(res => {
-          this.tableData = res.data.list.map(item => {
-            item.sexLabel = item.sex === 0 ? '女' : '男'
-            return item
-          })
-          this.config.total = res.data.count
-        })
-      })
+    canm () {
+      console.log('sada')
+    },
+    openDialog() {
+      this.$refs.dialogDom.init();
+    },
+    closeDialog() {
+      this.visible = false;
     }
   },
   created() {
-    this.getList()
+    this.getTableData()
     }
   }
 

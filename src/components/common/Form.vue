@@ -4,10 +4,10 @@
     ref="form"
     v-bind="$attrs">
     <el-form-item v-for="item in formItems" :key="item.model" :label="item.label">
-      <el-input v-model="form[item.model]"
+      <el-input v-model="form[item.model]" clearable
         v-if="item.type === 'input'">
       </el-input>
-      <el-select v-model="form[item.model]"
+      <el-select v-model="form[item.model]" clearable
         v-if="item.type === 'select'">
         <el-option
           v-for="item in item.options"
@@ -19,6 +19,7 @@
       <el-date-picker
           v-if="item.type === 'datePicker'"
           v-model="form[item.model]"
+          clearable
           type="daterange"
           range-separator="-"
           start-placeholder="开始日期"

@@ -7,14 +7,14 @@
             <el-header style="height:80px">
                 <common-header></common-header>
             </el-header>
-            <el-main><router-view/></el-main>
+            <el-main style="overflow: hidden"><router-view/></el-main>
         </el-container>
     </el-container>
 </template>
 
 <script>
-import CommonHeader from '../components/Header.vue'
-import CommonAside from '../components/Aside.vue'
+import CommonHeader from '../components/layout/Header.vue'
+import CommonAside from '../components/layout/Aside.vue'
 
 export default {
     components: {

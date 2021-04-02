@@ -42,20 +42,20 @@ export default {
     data() {
         return {
             items: [
-                {     
-                        path: '/',
-                        label: "首页",
-                        icon: 'el-icon-s-home'
+                {
+                    path: '/',
+                    label: "首页",
+                    icon: 'el-icon-s-home'
                 },
                 {          
                     path: '/blog',
                     label: "博客",
-                    icon: 'el-icon-video-play',
+                    icon: 'el-icon-position',
                 },           
                 {                  
                         path: '/user',
                         label: '用户管理',
-                        icon: 'el-icon-user'
+                        icon: 'el-icon-s-custom'
                 },
                 {
                     path: '/others',

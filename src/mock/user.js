@@ -34,22 +34,21 @@ for (let i = 0; i < count; i++) {
 
 export default {
   /**
-   * 获取列表
-   * 要带参数 name, page, limt; name可以不填, page,limit有默认值。
-   * @param name, page, limit
+   * 获取表格数据
+   * @param name, page, pageSize
    * @return {{code: number, count: number, data: *[]}}
    */
   getUserList: config => {
-    const { name, page = 1, limit = 20 } = param2Obj(config.url)
-    console.log('name:' + name, 'page:' + page, '分页大小limit:' + limit)
+    const { name, currentPage, pageSize } = param2Obj(config.url)
+    console.log('name:' + name, 'currentPage:' + currentPage, 'pageSize:' + pageSize)
     const mockList = List.filter(user => {
       if (name && user.name.indexOf(name) === -1 && user.addr.indexOf(name) === -1) return false
       return true
     })
-    const pageList = mockList.filter((item, index) => index < limit * page && index >= limit * (page - 1))
+    const pageList = mockList.filter((item, index) => index < pageSize * currentPage && index >= pageSize * (currentPage - 1))
     return {
       code: 20000,
-      count: mockList.length,
+      total: mockList.length,
       list: pageList
     }
   },
@@ -101,7 +100,7 @@ export default {
    * @param config
    * @return {{code: number, data: {message: string}}}
    */
-  batchremove: config => {
+  batchRemove: config => {
     let { ids } = param2Obj(config.url)
     ids = ids.split(',')
     List = List.filter(u => !ids.includes(u.id))

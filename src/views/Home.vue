@@ -5,7 +5,7 @@
           <el-card shadow="hover"  style="margin-bottom:20px">
             <div class="user-info">
               <img :src="userImg">
-              <p class="user-name">大秋</p>
+              <p class="user-name">灯火可亲</p>
               <p class="user-access">管理员</p>
               <div id="login-container">
                 <div class="login-info">
@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import Echart from '../components/EChart'
+import Echart from '../components/common/EChart'
 export default {
   components: {
     Echart

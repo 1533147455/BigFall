@@ -29,7 +29,7 @@ export default {
     data() {
       return {
         breadList: [],
-        userImg: require('../assets/images/user.jpg')
+        userImg: require('../../assets/images/user.jpg')
       }
     },
     watch: {
