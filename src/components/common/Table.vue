@@ -4,13 +4,15 @@
           :data="tableData"
           :height="height"
           style="width: 100%"
-          v-loading="config.loading">
+          v-loading="config.loading"
+          showOverflowTooltip
+          tooltip-effect="light">
         <el-table-column
             label="序号"
             width="85"
             align="center">
           <template slot-scope="scope">
-            <span>{{ (config.currentPage - 1) * 20 + scope.$index + 1 }}</span>
+            <span>{{ (config.currentPage - 1) * config.pageSize + scope.$index + 1 }}</span>
           </template>
         </el-table-column>
         <el-table-column

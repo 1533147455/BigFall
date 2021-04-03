@@ -9,7 +9,9 @@ import store from './store'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
-
+import format from '@/assets/js/format.js';
+// Vue.use(format)
+Vue.prototype.$format = format
 
 
 

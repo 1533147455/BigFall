@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+
+axios.defaults.timeout = 3000;
 //  创建一个axios实例
 const service = axios.create({
     //  请求超时时间,模拟网络请求

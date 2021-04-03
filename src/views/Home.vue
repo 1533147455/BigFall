@@ -9,20 +9,23 @@
               <p class="user-access">管理员</p>
               <div id="login-container">
                 <div class="login-info">
-                  <p>上次登陆时间：<span>2020/11/17</span></p>
+                  <p>上次登陆时间：<span>{{ new Date().toLocaleDateString('cn',{hour12:false}) }}</span></p>
                   <p>上次登录地点： <span>广州</span></p>
                 </div> 
               </div>    
             </div>
           </el-card>
           <el-card shadow="hover" id="left-bottom">
-              <el-table :data="tableData">
-                <el-table-column show-overflow-tooltip align="center"
-                  v-for="(val,key) in tableLabel" 
-                  :key="key" :prop="key" 
-                  :label="val">
-                </el-table-column>
-              </el-table>
+                  <common-table ref="twoTable"
+                    :height="423"
+                    :table-api="tableApi"
+                    :tableColumns="tableColumns"
+                    :show-pagination="false">
+                    <template #operate="{row}">
+                      <el-button @click="canm(row.id)" type="text" size="medium">查看</el-button>
+                      <el-button type="text" size="medium">编辑</el-button>
+                    </template>
+                  </common-table>
           </el-card>
         </el-col>
         <!-- 右边显示数据 -->
@@ -38,7 +41,7 @@
           <!-- ECharts组件展示 -->
           <div class="right-middle">
             <el-card id="home-echart" shadow="hover"  body-style="height: 320px" >
-              <echart :chartData="echartData.order" :v-loading="loading"></echart>
+              <echart :chartData="echartsData.order" :v-loading="loading"></echart>
           </el-card>
           </div>
           <!-- 用户活跃图表 -->
@@ -56,13 +59,17 @@
 
 <script>
 import Echart from '../components/common/EChart'
+import CommonTable from '../components/common/CommonTable'
+import HomeApi from "@/api/home";
 export default {
   components: {
-    Echart
+    Echart,
+    CommonTable
   },
   data() {
     return {
       loading: true,
+      tableApi: HomeApi.getBookTable.bind(HomeApi),
       userImg: require('../assets/images/user.jpg'),
       rightTopData: [
         { name: '文章数：',value: '12',icon: 'el-icon-star-on',color: '#409eff' },
@@ -73,13 +80,13 @@ export default {
         { name: '评论量：',value: '843',icon: 'el-icon-star-on',color: '#409eff' },
       ],
       tableData: [],
-      tableLabel: {
-        id: '编号',
-        name: '书名',
-        author: '作者',
-        price: '价格',
-      },
-      echartData: {
+      tableColumns: [
+        { prop: 'id', label: '编号', width: '55px', align: 'center' },
+        { prop: 'name', label: '书名' },
+        { prop: 'author', label: '作者' },
+        { prop: 'price', label: '价格' }
+      ],
+      echartsData: {
         order: {
           xData: [],
           series: []
@@ -95,14 +102,14 @@ export default {
     }
   },
   methods: {
-    getTableData() {
+    getEchartsData() {
     this.$http.get('/home/getData').then(res => {
         res = res.data
         const order = res.data.orderData
-        this.echartData.order.xData = order.date
+        this.echartsData.order.xData = order.date
         let keyArray = Object.keys(order.data[0])
         keyArray.forEach(key => {
-          this.echartData.order.series.push({
+          this.echartsData.order.series.push({
             name: key === 'wechat'?'小程序':key,
             data: order.data.map(item => item[key]),
             type: 'line'
@@ -113,12 +120,10 @@ export default {
     }
   },
   created() {
-    this.getTableData();
-    this.$http.get('http://localhost:8181/booklist/findAll').then((res) => {
-        console.log(res);
-        this.tableData = res?.data || [];
-        
-    }) 
+    this.getEchartsData();
+    this.$nextTick(() => {
+      this.$refs.twoTable.getData();
+    })
   }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="page-one">
     <query-form :formItems="formItems" :form="form" inline>
       <template #testSlot="{item}">
         <el-tooltip :content="item.description" placement="bottom" effect="light">

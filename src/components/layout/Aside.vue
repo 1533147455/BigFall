@@ -21,11 +21,11 @@
         <el-submenu v-if="item.children" 
                     :key="item.label"
                     :index="item.path">
-        <template slot="title">
-            <i :class="item.icon"></i>
-            <span slot="title">{{ item.label }}</span>
-        </template>
-        <el-menu-item v-for="child in item.children" 
+            <template slot="title">
+                <i :class="item.icon"></i>
+                <span slot="title">{{ item.label }}</span>
+            </template>
+            <el-menu-item v-for="child in item.children"
                 :key="child.label"
                 :index="child.path">
                 <i :class="child.icon"></i>
@@ -53,9 +53,9 @@ export default {
                     icon: 'el-icon-position',
                 },           
                 {                  
-                        path: '/user',
-                        label: '用户管理',
-                        icon: 'el-icon-s-custom'
+                    path: '/user',
+                    label: '用户管理',
+                    icon: 'el-icon-s-custom'
                 },
                 {
                     path: '/others',
@@ -65,12 +65,12 @@ export default {
                         {
                             path: '/page1',
                             label: '浮浮沉沉',
-                            icon: 'el-icon-setting'
+                            icon: 'el-icon-heavy-rain'
                         },
                         {                   
                             path: '/page2',
                             label: '起起落落',
-                            icon: 'el-icon-sunrise'
+                            icon: 'el-icon-lightning'
                         }                
                     ]
                 }           
@@ -88,7 +88,7 @@ export default {
         border-right: none
     }
     .el-menu-vertical-demo:not(.el-menu--collapse) {
-    width: 200px;
-    min-height: 400px;
-  }
+        width: 200px;
+        min-height: 400px;
+    }
 </style>
