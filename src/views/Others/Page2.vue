@@ -1,12 +1,14 @@
 <template>
   <div>
-      写笔记
+      写笔记asdaada阿打算到的
   </div>
 </template>
 
 <script>
 export default {
-
+  created() {
+    console.log('saadadasda')
+  }
 }
 </script>
 

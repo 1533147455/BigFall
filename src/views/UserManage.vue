@@ -1,12 +1,12 @@
 <template>
   <div class="manage">
     <div class="manage-header">
-      <common-form inline :form-items="formItems" :form="form">
+      <query-form :form-items="formItems" :form="form" inline>
         <template #button>
           <el-button type="primary">添加用户</el-button>
           <el-button type="primary" @click="openDialog">批量删除</el-button>
         </template>
-      </common-form>
+      </query-form>
       <common-dialog ref="dialogDom" v-bind="dialogConfig"></common-dialog>
     </div>
     <div class="manage-content">
@@ -27,36 +27,33 @@
 </template>
 
 <script>
-import CommonForm from '../components/common/Form'
 import CommonTable from '../components/common/Table'
 import CommonDialog from '../components/common/Dialog'
+import QueryForm from "@/components/common/QueryForm";
 export default {
   components: {
-    CommonForm,
+    QueryForm,
     CommonTable,
     CommonDialog
   },
   data() {
     return {
-      form: {
-        name: '',
-        food: ''
-      },
+      form: {},
       formItems: [
         {
-          type: 'input',
-          model: 'name',
+          inputType: 'RemoteInput',
+          formKey: 'name',
           label: '姓名',
         },
         {
-          type: 'select',
-          options: [
+          inputType: 'RemoteSelect',
+          staticOptions: [
             { label: '鸡蛋', value: 'egg' },
             { label: '牛奶', value: 'milk' },
             { label: '面包', value: 'bread' }
           ],
-          model: 'food',
-          label: '食物'
+          formKey: 'food',
+          label: '大哥大'
         }
       ],
       visible: false,

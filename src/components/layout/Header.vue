@@ -4,7 +4,6 @@
     <el-button type="primary" icon="el-icon-menu" size="small"
     @click="isCollapse()"></el-button>
     <el-breadcrumb separator-class="el-icon-arrow-right">
-      <!-- <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item> -->
       <el-breadcrumb-item  v-for="bread in breadList" :key="bread.name"> 
         {{ bread.meta.title }}
         </el-breadcrumb-item>
@@ -35,7 +34,7 @@ export default {
     watch: {
       $route() {
         this.getBreadList()
-      }   
+      }
     },
     methods: {
       ...mapMutations(['isCollapse','clearToken','clearMenu']),
@@ -47,8 +46,11 @@ export default {
         this.clearToken()
         this.clearMenu()
         location.reload()
-      }       
-    }
+      }
+    },
+  created() {
+    this.getBreadList() // 刷新后保持面包屑
+  }
 }
 
 </script>

@@ -1,4 +1,4 @@
-import Cookie from 'js-cookie'
+// import Cookie from 'js-cookie'
 export default {
     state: {
         isCollapse: false,
@@ -10,15 +10,15 @@ export default {
         },
         setMenu(state,val) {
             state.menu = val
-            Cookie.set('menu',JSON.stringify(val))
+            localStorage.setItem('menu',JSON.stringify(val))
         },
         clearMenu(state) {
             state.menu = []
-            Cookie.remove('menu')
+            localStorage.removeItem('menu')
         },
         addMenu(state,router) {
-            if(!Cookie.get('menu')) { return }
-            let menu = JSON.parse(Cookie.get('menu'))
+            if(!localStorage.getItem('menu')) { return }
+            let menu = JSON.parse(localStorage.getItem('menu'))
             state.menu = menu
             //添加动态路由 主路由为Main.vue
             let currentMenu = [

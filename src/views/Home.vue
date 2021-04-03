@@ -114,10 +114,9 @@ export default {
   },
   created() {
     this.getTableData();
-    const _this = this;
-    _this.$http.get('http://localhost:8181/booklist/findAll').then((res) => {
+    this.$http.get('http://localhost:8181/booklist/findAll').then((res) => {
         console.log(res);
-        _this.tableData = res.data;
+        this.tableData = res?.data || [];
         
     }) 
   }

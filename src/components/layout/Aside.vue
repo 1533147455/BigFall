@@ -64,13 +64,13 @@ export default {
                     children: [
                         {
                             path: '/page1',
-                            label: '笔记列表',
+                            label: '浮浮沉沉',
                             icon: 'el-icon-setting'
                         },
                         {                   
                             path: '/page2',
-                            label: '写笔记',
-                            icon: 'el-icon-setting'                  
+                            label: '起起落落',
+                            icon: 'el-icon-sunrise'
                         }                
                     ]
                 }           

@@ -36,13 +36,13 @@ const routes = [
             path: '/page1',
             name: 'page1',
             component: () => import('@/views/Others/Page1.vue'),
-            meta: { title: '笔记列表' }
+            meta: { title: '浮浮沉沉' }
           },
           {
             path: '/page2',
             name: 'page2',
             component: () => import('@/views/Others/Page2.vue'),
-            meta: { title: '写笔记' }
+            meta: { title: '起起落落' }
           }
         ]
       }

@@ -1,4 +1,4 @@
-import Cookie from 'js-cookie'
+// import Cookie from 'js-cookie'
 export default {
     state: {
         token: ''
@@ -7,16 +7,16 @@ export default {
         // 存放token
         setToken(state,val) {
             state.token = val
-            Cookie.set('token',val)
+            localStorage.setItem('token',val)
         },
         // 清空token
         clearToken(state) {
             state.token = ''
-            Cookie.remove('token')
+            localStorage.removeItem('token')
         },
         // 获取token
         getToken(state) {
-            state.token = Cookie.get('token')
+            state.token = localStorage.getItem('token')
         }
     },
     actions: {

@@ -4,7 +4,7 @@ export default {
     const { username, password } = JSON.parse(config.body)
     console.log(JSON.parse(config.body))
     // 先判断用户是否存在
-    if (username === 'admin' || username === 'root') {
+    if (username === 'root' || username === 'user') {
       // 判断账号和密码是否对应
       if (username === 'root' && password === '123123') {
         return {
@@ -19,11 +19,11 @@ export default {
                 url: 'Home'
               },
               {
-                path: '/video',
-                name: 'video',
-                label: '视频管理页',
+                path: '/blog',
+                name: 'blog',
+                label: '博客',
                 icon: 'video-play',
-                url: 'VideoManage'
+                url: 'Blog'
               },
               {
                 path: '/user',
@@ -47,7 +47,7 @@ export default {
                     path: '/page2',
                     name: 'page2',
                     label: '页面2',
-                    icon: 'setting',
+                    icon: 'sunrise',
                     url: 'Others/Page2'
                   }
                 ]
@@ -57,7 +57,7 @@ export default {
             message: '获取成功'
           }
         }
-      } else if (username === 'wp' && password === '123456') {
+      } else if (username === 'user' && password === '123123') {
         return {
           code: 20000,
           data: {
@@ -70,11 +70,11 @@ export default {
                 url: 'Home'
               },
               {
-                path: '/video',
-                name: 'video',
-                label: '视频管理页',
+                path: '/blog',
+                name: 'blog',
+                label: '博客',
                 icon: 'video-play',
-                url: 'VideoManage'
+                url: 'Blog'
               }
             ],
             token: Mock.Random.guid(),
