@@ -4,7 +4,7 @@
     <el-button type="primary" icon="el-icon-menu" size="small"
     @click="isCollapse()"></el-button>
     <el-breadcrumb separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item  v-for="bread in breadList" :key="bread.name"> 
+      <el-breadcrumb-item  v-for="bread in breadList" :key="bread.name">
         {{ bread.meta.title }}
         </el-breadcrumb-item>
     </el-breadcrumb>

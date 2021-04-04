@@ -63,17 +63,22 @@ export default {
                     icon: 'el-icon-bell',
                     children: [
                         {
-                            path: '/page1',
+                            path: '/others/page1',
                             label: '浮浮沉沉',
                             icon: 'el-icon-heavy-rain'
                         },
-                        {                   
-                            path: '/page2',
+                        {
+                            path: '/others/page2',
                             label: '起起落落',
                             icon: 'el-icon-lightning'
-                        }                
+                        }
                     ]
-                }           
+                },
+                {
+                  path: '/resume',
+                  label: '简历',
+                  icon: 'el-icon-s-custom'
+                },
             ]
         }
     }

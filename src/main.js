@@ -20,7 +20,7 @@ import './mock'
 
 router.beforeEach((to,from,next) => {
   store.commit('getToken')
-  store.commit('getMenu')
+  // store.commit('getMenu')
   let token = store.state.user.token
   if(!token && to.name !== 'login') {
     next({name:'login'})

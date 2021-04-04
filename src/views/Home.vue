@@ -6,7 +6,7 @@
             <div class="user-info">
               <img :src="userImg">
               <p class="user-name">灯火可亲</p>
-              <p class="user-access">管理员</p>
+              <p class="user-access">Love the process，not the goal.</p>
               <div id="login-container">
                 <div class="login-info">
                   <p>上次登陆时间：<span>{{ new Date().toLocaleDateString('cn',{hour12:false}) }}</span></p>

@@ -1,0 +1,58 @@
+.resume {
+  height: 100%;
+  #resume-left {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    #info-card {
+      flex-basis: 235px;
+    }
+    #skill-card {
+      overflow: auto;
+    }
+  }
+}
+.card-title { // 公共标题
+  font-size: 19px;
+  font-weight: 600;
+  color: gray;
+}
+::v-deep .el-card__body {
+  padding: 10px 20px;
+}
+.info-section { // 个人信息卡片
+  display: flex;
+  flex-wrap: wrap;
+  p {
+    width: 50%;
+    line-height: 28px;
+    font-size: 15px;
+    color: #999;
+    margin: 5px 0;
+    span {
+      color: #666;
+      margin-left: 10px;
+    }
+  }
+}
+.skill-section { // 专业技能卡片
+  ol {
+    color: #666;
+    font-size: 15px;
+    padding-inline-start: 20px;
+    li {
+      line-height: 24px;
+      margin: 5px 0;
+    }
+  }
+}
+.right-bottom {
+  height: 200px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  .el-card {
+    width: 48%;
+  }
+}

@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import  { mapMutations } from 'vuex'
+// import  { mapMutations } from 'vuex'
 export default {
     data() {
         return {
@@ -31,21 +31,21 @@ export default {
         }
     },
     methods: {
-	...mapMutations(['setToken','clearToken','getToken','clearMenu','setMenu','addMenu']),
+	// ...mapMutations(['setToken','clearToken','getToken','clearMenu','setMenu','addMenu']),
         login() {
-            this.$http.post('/permission/getMenu',this.form)
-            .then(res => {
-                res = res.data
-                if (res.code === 20000) {
-                    this.clearMenu()
-                    this.setMenu(res.data.menu)
-                    this.setToken(res.data.token)
-                    this.addMenu(this.$router)
-                    this.$router.push( {name: 'home'} )
-                } else {
-                    this.$message.warning(res.data.message)
-                }
-            })
+            // this.$http.post('/permission/getMenu',this.form)
+            // .then(res => {
+            //     res = res.data
+            //     if (res.code === 20000) {
+            //         this.clearMenu()
+            //         this.setMenu(res.data.menu)
+            //         this.setToken(res.data.token)
+            //         this.addMenu(this.$router)
+            //         this.$router.push( {name: 'home'} )
+            //     } else {
+            //         this.$message.warning(res.data.message)
+            //     }
+            // })
         },
         open() {
             this.$alert('账号：root，密码：123123',  {

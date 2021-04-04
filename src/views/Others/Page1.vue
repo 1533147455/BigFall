@@ -1,10 +1,14 @@
 <template>
   <div class="page-one">
+    test
     <query-form :formItems="formItems" :form="form" inline>
       <template #testSlot="{item}">
         <el-tooltip :content="item.description" placement="bottom" effect="light">
             <i class="el-icon-mouse" style="font-size: 20px;"></i>
         </el-tooltip>
+      </template>
+      <template #button>
+        <el-button @click="$router.push({name: 'page2'})">点击去page2</el-button>
       </template>
     </query-form>
   </div>

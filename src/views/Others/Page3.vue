@@ -1,6 +1,6 @@
 <template>
-  <div class="page-two">
-      写笔记asdaada阿打算到的
+  <div>
+    page3
   </div>
 </template>
 
