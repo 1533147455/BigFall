@@ -6,10 +6,8 @@
     flex-direction: column;
     gap: 20px;
     #info-card {
-      flex-basis: 235px;
     }
     #skill-card {
-      overflow: auto;
     }
   }
 }
@@ -20,6 +18,7 @@
 }
 ::v-deep .el-card__body {
   padding: 10px 20px;
+  overflow: auto;
 }
 .info-section { // 个人信息卡片
   display: flex;
@@ -47,8 +46,56 @@
     }
   }
 }
+.intern-section { // 实习经历卡片
+  .basic-information {
+    display: flex;
+    justify-content: space-between;
+    span {
+      color: #666;
+    }
+  }
+  .basic-content {
+    p {
+      line-height: 28px;
+      font-size: 15px;
+      color: #999;
+      margin: 5px 0;
+      span {
+        color: #666;
+        margin-left: 10px;
+      }
+    }
+  }
+}
+.project-section {
+  .basic-information {
+    font-size: 17px;
+    color: #606266;
+    :first-child {
+      margin-left: 33px;
+    }
+  }
+  .basic-content {
+    p {
+      line-height: 28px;
+      font-size: 15px;
+      color: #999;
+      margin: 5px 0;
+      span {
+        color: #666;
+        margin-left: 10px;
+      }
+    }
+  }
+}
+.advantage-section {
+  span {
+    line-height: 28px;
+    font-size: 15px;
+    color: #666;
+  }
+}
 .right-bottom {
-  height: 200px;
   display: flex;
   justify-content: space-between;
   margin-top: 20px;

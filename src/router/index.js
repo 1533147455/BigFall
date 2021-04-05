@@ -18,13 +18,19 @@ const routes = [
         path: '/blog',
         name: 'blog',
         component: () => import('@/views/Blog.vue'),
-        meta: { title: '博客' }
+        meta: { title: '笔记' }
       },
       {
         path: '/user',
         name: 'user',
         component: () => import('@/views/UserManage.vue'),
         meta: { title: '用户管理' }
+      },
+      {
+        path: '/resume',
+        name: 'resume',
+        component: () => import('@/views/Resume.vue'),
+        meta: { title: '简历' }
       },
       {
         path: '/others',
@@ -46,13 +52,7 @@ const routes = [
             meta: { title: '起起落落' }
           }
         ]
-      },
-      {
-        path: '/resume',
-        name: 'resume',
-        component: () => import('@/views/Resume.vue'),
-        meta: { title: '简历' }
-      },
+      }
     ]
   },
   {

@@ -49,13 +49,18 @@ export default {
                 },
                 {          
                     path: '/blog',
-                    label: "博客",
+                    label: "笔记",
                     icon: 'el-icon-position',
                 },           
                 {                  
                     path: '/user',
                     label: '用户管理',
                     icon: 'el-icon-s-custom'
+                },
+                {
+                  path: '/resume',
+                  label: '简历',
+                  icon: 'el-icon-s-custom'
                 },
                 {
                     path: '/others',
@@ -73,12 +78,7 @@ export default {
                             icon: 'el-icon-lightning'
                         }
                     ]
-                },
-                {
-                  path: '/resume',
-                  label: '简历',
-                  icon: 'el-icon-s-custom'
-                },
+                }
             ]
         }
     }
