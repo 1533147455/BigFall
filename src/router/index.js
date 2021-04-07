@@ -52,6 +52,11 @@ const routes = [
             meta: { title: '起起落落' }
           }
         ]
+      },
+      {
+        path: '*',
+        name: '404',
+        component: () => import('@/views/404.vue')
       }
     ]
   },
@@ -59,22 +64,11 @@ const routes = [
     path: '/login',
     name: 'login',
     component: () => import('@/views/Login.vue')
-  },
-  // {
-  //   path: '/others/page1',
-  //   name: 'page11',
-  //   component: () => import('@/views/Others/Page1'),
-  //     meta: { title: '浮浮沉沉' }
-  // },
-  // {
-  //   path: '/others/page2',
-  //   name: 'page22',
-  //   component: () => import('@/views/Others/Page2'),
-  //   meta: { title: '起起落落' }
-  // }
+  }
 ]
 
 const router = new VueRouter({
+  mode: 'history',
   routes
 })
 

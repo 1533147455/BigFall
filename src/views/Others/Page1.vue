@@ -1,14 +1,10 @@
 <template>
   <div class="page-one">
-    test
     <query-form :formItems="formItems" :form="form" inline>
-      <template #testSlot="{item}">
+      <template #dateSlot="{item}">
         <el-tooltip :content="item.description" placement="bottom" effect="light">
             <i class="el-icon-mouse" style="font-size: 20px;"></i>
         </el-tooltip>
-      </template>
-      <template #button>
-        <el-button @click="$router.push({name: 'page2'})">点击去page2</el-button>
       </template>
     </query-form>
   </div>
@@ -55,8 +51,16 @@ export default {
           rangeSeparator: '-',
           startPlaceholder: '开始日期',
           endPlaceholder: '结束日期',
-          slotName: 'testSlot',
+          slotName: 'dateSlot',
           description: '日期的提示内容balabala'
+        },
+        {
+          inputType: 'NumberInput',
+          formKey: 'stockNum',
+          label: '库存',
+          min: 0.00,
+          max: 999.99,
+          precision: 2
         }
       ],
 

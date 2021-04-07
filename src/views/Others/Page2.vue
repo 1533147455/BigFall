@@ -1,11 +1,16 @@
 <template>
   <div class="page-two">
-      写笔记asdaada阿打算到的
+    <el-input type="number" :min="1" :max="10" v-model.number="num"></el-input>
   </div>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      num: undefined
+    }
+  }
 }
 </script>
 

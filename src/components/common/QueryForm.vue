@@ -26,10 +26,12 @@
 <script>
 import RemoteInput from './RemoteInput.vue';
 import RemoteSelect from './RemoteSelect.vue';
+import NumberInput from '@/components/common/NumberInput';
 export default {
   components: {
     RemoteInput,
-    RemoteSelect
+    RemoteSelect,
+    NumberInput
   },
   props: {
     formItems: Array,
