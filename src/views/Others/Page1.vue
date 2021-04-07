@@ -1,10 +1,9 @@
 <template>
   <div class="page-one">
     <query-form :formItems="formItems" :form="form" inline>
-      <template #dateSlot="{item}">
-        <el-tooltip :content="item.description" placement="bottom" effect="light">
-            <i class="el-icon-mouse" style="font-size: 20px;"></i>
-        </el-tooltip>
+      <template #button>
+        <el-button type="primary" @click="cancel">主要按钮</el-button>
+        <el-button type="primary" plain>主要按钮</el-button>
       </template>
     </query-form>
   </div>
@@ -26,21 +25,16 @@ export default {
           inputType: 'RemoteInput',
           formKey: 'name',
           label: '姓名',
-          value: '',
-          staticOptions: [
-            { value: '三全食品', label: 'bbqa'},
-            { value: '四全食品', label: 'bbqb'},
-            { value: '五全食品', label: 'bbqc'},
-          ]
+          staticOptions: [ '三全食品', '四全食品', '五全食品' ]
         },
         {
           inputType: 'RemoteSelect',
           formKey: 'food',
           label: '食物',
           staticOptions: [
-            { value: '六全食品', label: 'bbqa'},
-            { value: '七全食品', label: 'bbqb'},
-            { value: '八全食品', label: 'bbqc'},
+            { value: '6', label: '六全食品'},
+            { value: '7', label: '七全食品'},
+            { value: '8', label: '八全食品'},
           ]
         },
         {
@@ -51,8 +45,7 @@ export default {
           rangeSeparator: '-',
           startPlaceholder: '开始日期',
           endPlaceholder: '结束日期',
-          slotName: 'dateSlot',
-          description: '日期的提示内容balabala'
+          valueFormat: 'yyyy-MM-dd'
         },
         {
           inputType: 'NumberInput',
@@ -62,8 +55,12 @@ export default {
           max: 999.99,
           precision: 2
         }
-      ],
-
+      ]
+    }
+  },
+  methods: {
+    cancel() {
+      console.log(this.form);
     }
   }
 }

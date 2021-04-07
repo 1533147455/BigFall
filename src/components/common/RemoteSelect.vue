@@ -1,7 +1,7 @@
 <template>
   <el-select
     ref="selectDom"
-    v-model="value"
+    :value="value"
     v-bind="$attrs"
     v-on="$listeners"
     clearable

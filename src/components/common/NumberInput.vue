@@ -16,6 +16,7 @@
         :min="min"
         :name="name"
         :label="label"
+        clearable
         @blur="handleBlur"
         @focus="handleFocus"
         @input="handleInput"
