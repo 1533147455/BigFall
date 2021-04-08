@@ -52,11 +52,6 @@ const routes = [
             meta: { title: '起起落落' }
           }
         ]
-      },
-      {
-        path: '*',
-        name: '404',
-        component: () => import('@/views/404.vue')
       }
     ]
   },
@@ -64,11 +59,16 @@ const routes = [
     path: '/login',
     name: 'login',
     component: () => import('@/views/Login.vue')
+  },
+  {
+    path: '*',
+    name: '404',
+    component: () => import('@/views/NotFound.vue')
   }
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  // mode: 'history',
   routes
 })
 

@@ -1,9 +1,10 @@
 <template>
   <div class="page-one">
     <query-form :formItems="formItems" :form="form" inline>
-      <template #button>
-        <el-button type="primary" @click="cancel">主要按钮</el-button>
-        <el-button type="primary" plain>主要按钮</el-button>
+      <el-button type="primary" @click="cancel">打印表单</el-button>
+      <el-button type="primary" plain>没用的按钮</el-button>
+      <template #rightSlot>
+        <el-button type="text" @click="cancel">操作记录</el-button>
       </template>
     </query-form>
   </div>

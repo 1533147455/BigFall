@@ -1,6 +1,6 @@
 <template>
   <div class="page-two">
-    <el-input type="number" :min="1" :max="10" v-model.number="num"></el-input>
+    <el-input v-model="value"></el-input>
   </div>
 </template>
 
@@ -8,8 +8,13 @@
 export default {
   data() {
     return {
-      num: undefined
+      value: undefined
     }
+  },
+  created() {
+    this.$http.get('/home').then(res => {
+      this.value = res.data;
+    })
   }
 }
 </script>

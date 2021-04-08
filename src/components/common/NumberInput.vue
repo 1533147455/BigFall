@@ -3,7 +3,6 @@
       @dragstart.prevent
       :class="[
       'number-input',
-      inputNumberSize ? 'el-input-number--' + inputNumberSize : '',
       { 'is-disabled': inputNumberDisabled },
     ]">
     <el-input
@@ -11,7 +10,6 @@
         :value="displayValue"
         :placeholder="placeholder"
         :disabled="inputNumberDisabled"
-        :size="inputNumberSize"
         :max="max"
         :min="min"
         :name="name"
@@ -120,9 +118,6 @@ export default {
     },
     _elFormItemSize() {
       return (this.elFormItem || {}).elFormItemSize;
-    },
-    inputNumberSize() {
-      return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
     },
     inputNumberDisabled() {
       return this.disabled || !!(this.elForm || {}).disabled;

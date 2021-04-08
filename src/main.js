@@ -31,7 +31,7 @@ router.beforeEach((to,from,next) => {
 
 Vue.config.productionTip = false
 
-Vue.use(ElementUI)
+Vue.use(ElementUI, { size: 'medium' })
 
 Vue.prototype.$http = http
 
