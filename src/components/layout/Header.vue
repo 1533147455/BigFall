@@ -2,16 +2,16 @@
  <header>
    <div class="left-content">
     <el-button type="primary" icon="el-icon-menu" size="small"
-    @click="isCollapse()"></el-button>
+    @click="isCollapse"></el-button>
     <el-breadcrumb separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item  v-for="bread in breadList" :key="bread.name">
-        {{ bread.meta.title }}
+      <el-breadcrumb-item  v-for="item in breadList" :key="item.path">
+        {{ item.meta.title }}
         </el-breadcrumb-item>
     </el-breadcrumb>
   </div>
   <div class="right-content">
-    <el-dropdown trigger="click"> 
-        <img :src="userImg" class="user">
+    <el-dropdown>
+      <img :src="userImg" class="user">
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item>个人中心</el-dropdown-item>
         <el-dropdown-item @click.native="exit">退出</el-dropdown-item>   
@@ -37,20 +37,19 @@ export default {
       }
     },
     methods: {
-      ...mapMutations(['isCollapse','clearToken','clearMenu']),
+      ...mapMutations(['isCollapse','clearToken']),
        getBreadList() {
-        let matched = this.$route.matched.filter(item => item.meta.title)      
+        let matched = this.$route.matched.filter(item => item.meta.title)
          this.breadList = matched
       },
       exit() {
         this.clearToken()
-        this.clearMenu()
         location.reload()
       }
     },
-  created() {
-    this.getBreadList() // 刷新后保持面包屑
-  }
+    created() {
+      this.getBreadList() // 刷新后保持面包屑
+    }
 }
 
 </script>

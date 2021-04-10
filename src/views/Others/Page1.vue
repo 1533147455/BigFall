@@ -1,25 +1,29 @@
 <template>
   <div class="page-one">
     <query-form :formItems="formItems" :form="form" inline>
-      <el-button type="primary" @click="cancel">打印表单</el-button>
-      <el-button type="primary" plain>没用的按钮</el-button>
+      <el-button type="primary">查询</el-button>
+      <el-button type="primary">综合查询</el-button>
       <template #rightSlot>
-        <el-button type="text" @click="cancel">操作记录</el-button>
+        <el-button type="primary" plain @click="add">新增</el-button>
       </template>
     </query-form>
+    <add-dialog ref="addDialog" @updateData="updateData"></add-dialog>
   </div>
 </template>
 
 <script>
-import QueryForm from "@/components/common/QueryForm";
+import QueryForm from "@/components/common/CommonForm";
+import AddDialog from "@/views/Others/addDialog"
 export default {
   components: {
-    QueryForm
+    QueryForm,
+    AddDialog
   },
   data() {
     return{
       inputValue: '',
       selectValue: '',
+      visible: false,
       form: {},
       formItems: [
         {
@@ -56,12 +60,21 @@ export default {
           max: 999.99,
           precision: 2
         }
-      ]
+      ],
+      batchAdjustForm: {},
+      confirmLoading: false,
+      rules: {
+        name: [
+          { required: true, message: '请输入活动名称' }
+        ]
+      }
     }
   },
   methods: {
-    cancel() {
-      console.log(this.form);
+    add() {
+      this.$refs.addDialog.init();
+    },
+    updateData() {
     }
   }
 }

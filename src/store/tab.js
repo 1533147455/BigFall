@@ -4,6 +4,9 @@ export default {
         isCollapse: false,
         menu: []
     },
+    getters: {
+        isCollapse: state =>  state.isCollapse
+    },
     mutations: {
         isCollapse(state) {
             state.isCollapse = !state.isCollapse

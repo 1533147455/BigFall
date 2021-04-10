@@ -23,3 +23,8 @@ $theme-color: #0084ff;
   /* 滚动条手柄 */
   background-color: #B3C0D1;
 }
+
+::v-deep .el-dialog--center .el-dialog__body {
+  text-align: initial;
+  padding: 25px 25px 0px;
+}

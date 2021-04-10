@@ -1,7 +1,10 @@
 import axios from 'axios'
 const HomeApi = {
     getBookTable() {
-        return axios.get('http://localhost:8181/booklist/findAll');
+        return axios.get('/home/bookList');
+    },
+    getUserTable() {
+        return axios.get('/user/getUser');
     }
 }
 export default HomeApi

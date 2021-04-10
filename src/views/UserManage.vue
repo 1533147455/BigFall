@@ -10,29 +10,28 @@
       <common-dialog ref="dialogDom" v-bind="dialogConfig"></common-dialog>
     </div>
     <div class="manage-content">
+      <common-table
+        ref="tableDom"
+        :height="658"
+        :table-api="tableApi"
+        :tableColumns="tableColumns">
+<!--        <template #operate="{row}">-->
+<!--          <el-button @click="canm(row.id)" type="text" size="medium">查看</el-button>-->
+<!--          <el-button type="text" size="medium">编辑</el-button>-->
+<!--        </template>-->
+      </common-table>
 <!--      <common-table-->
-<!--          ref="twoTable"-->
-<!--        :height="658"-->
-<!--        :tableData="tableData"-->
-<!--        table-api="/user/getUser"-->
-<!--        :tableColumns="tableColumns">-->
+<!--          :height="658"-->
+<!--          :tableData="tableData"-->
+<!--          :config="config"-->
+<!--          :tableColumns="tableColumns"-->
+<!--          @pageSizeChange="getTableData"-->
+<!--          @currentPageChange="getTableData">-->
 <!--        <template #operate="{row}">-->
 <!--          <el-button @click="canm(row.id)" type="text" size="medium">查看</el-button>-->
 <!--          <el-button type="text" size="medium">编辑</el-button>-->
 <!--        </template>-->
 <!--      </common-table>-->
-      <common-table
-          :height="658"
-          :tableData="tableData"
-          :config="config"
-          :tableColumns="tableColumns"
-          @pageSizeChange="getTableData"
-          @currentPageChange="getTableData">
-        <template #operate="{row}">
-          <el-button @click="canm(row.id)" type="text" size="medium">查看</el-button>
-          <el-button type="text" size="medium">编辑</el-button>
-        </template>
-      </common-table>
 
     </div>
   </div>
@@ -40,8 +39,9 @@
 
 <script>
 import CommonTable from '../components/common/Table'
-import CommonDialog from '../components/common/Dialog'
-import QueryForm from "@/components/common/QueryForm";
+import CommonDialog from '../components/common/CommonDialog'
+import QueryForm from "@/components/common/CommonForm";
+import HomeApi from "@/api/home";
 export default {
   components: {
     QueryForm,
@@ -68,6 +68,7 @@ export default {
           label: '大哥大'
         }
       ],
+      tableApi: HomeApi.getUserTable.bind(HomeApi),
       visible: false,
       dialogConfig: {
         title: '操作记录',
@@ -83,26 +84,26 @@ export default {
         { prop: 'addr', label: '地址', showOverflowTooltip: true },
         { prop: 'operate', label: '操作', slotName: 'operate',width: "150" }
       ],
-      config: { currentPage: 1, pageSize: 10, loading: false }
+      config: { currentPage: 1, pageSize: 10 }
     }
   },
   methods: {
-    getTableData() {
-      this.config.loading = true
-      this.$http.get('/user/getUser', {
-        params: {
-          currentPage: this.config.currentPage,
-          pageSize: this.config.pageSize
-        }
-      }).then(res => {
-        this.tableData = res.data.list.map(item => {
-          item.sexLabel = item.sex === 0 ? '女' : '男'
-          return item
-        })
-        this.config.total = res.data.total
-        this.config.loading = false
-      })
-    },
+    // getTableData() {
+    //   this.config.loading = true
+    //   this.$http.get('/user/getUser', {
+    //     params: {
+    //       currentPage: this.config.currentPage,
+    //       pageSize: this.config.pageSize
+    //     }
+    //   }).then(res => {
+    //     this.tableData = res.data.list.map(item => {
+    //       item.sexLabel = item.sex === 0 ? '女' : '男'
+    //       return item
+    //     })
+    //     this.config.total = res.data.total
+    //     this.config.loading = false
+    //   })
+    // },
     canm () {
       console.log('sada')
     },
@@ -114,10 +115,10 @@ export default {
     }
   },
   created() {
-    // this.$nextTick(() => {
-    //   this.$refs.twoTable.getData();
-    // })
-    this.getTableData()
+    this.$nextTick(() => {
+      this.$refs.tableDom.getData();
+    })
+    // this.getTableData()
   }
 }
 

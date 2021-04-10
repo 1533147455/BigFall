@@ -7,7 +7,7 @@
       active-text-color="#ffd04b"
       unique-opened
       router 
-      :collapse="this.$store.state.tab.isCollapse"
+      :collapse="isCollapse"
       >
     <template  v-for="item in items">
         <!-- 没有子菜单 -->
@@ -38,50 +38,54 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 export default {
-    data() {
-        return {
-            items: [
-                {
-                    path: '/',
-                    label: "首页",
-                    icon: 'el-icon-s-home'
-                },
-                {          
-                    path: '/blog',
-                    label: "笔记",
-                    icon: 'el-icon-position',
-                },           
-                {                  
-                    path: '/user',
-                    label: '用户管理',
-                    icon: 'el-icon-s-custom'
-                },
-                {
-                  path: '/resume',
-                  label: '简历',
+  data() {
+      return {
+          items: [
+              {
+                  path: '/',
+                  label: "首页",
+                  icon: 'el-icon-s-home'
+              },
+              {
+                  path: '/blog',
+                  label: "笔记",
+                  icon: 'el-icon-position',
+              },
+              {
+                  path: '/user',
+                  label: '用户管理',
                   icon: 'el-icon-s-custom'
-                },
-                {
-                    path: '/others',
-                    label: '其它',
-                    icon: 'el-icon-bell',
-                    children: [
-                        {
-                            path: '/others/page1',
-                            label: '浮浮沉沉',
-                            icon: 'el-icon-heavy-rain'
-                        },
-                        {
-                            path: '/others/page2',
-                            label: '起起落落',
-                            icon: 'el-icon-lightning'
-                        }
-                    ]
-                }
-            ]
-        }
-    }
+              },
+              {
+                path: '/resume',
+                label: '简历',
+                icon: 'el-icon-s-custom'
+              },
+              {
+                  path: '/others',
+                  label: '其它',
+                  icon: 'el-icon-bell',
+                  children: [
+                      {
+                          path: '/others/page1',
+                          label: '浮浮沉沉',
+                          icon: 'el-icon-heavy-rain'
+                      },
+                      {
+                          path: '/others/page2',
+                          label: '起起落落',
+                          icon: 'el-icon-lightning'
+                      }
+                  ]
+              }
+          ]
+      }
+  },
+  computed: {
+    ...mapGetters(['isCollapse'])
+  }
 }
     
 

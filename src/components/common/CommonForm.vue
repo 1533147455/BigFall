@@ -3,11 +3,12 @@
     <el-form
         ref="form"
         :model="form"
-        class="flex-item"
+        class="width-form"
         v-bind="$attrs">
       <el-form-item
           v-for="item in formItems"
           :key="item.formKey"
+          :prop="item.formKey"
           v-bind="item">
         <component
             :is="item.inputType"

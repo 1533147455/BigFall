@@ -1,17 +1,17 @@
 <template>
-    <el-container style="height: 100%">
-        <el-aside width="auto">
-            <common-aside></common-aside>
-        </el-aside>
-        <el-container>
-            <el-header style="height:80px">
-                <common-header></common-header>
-            </el-header>
-            <el-main style="overflow: hidden;">
-                <router-view/>
-            </el-main>
-        </el-container>
+  <el-container style="height: 100%">
+    <el-aside width="auto">
+      <common-aside></common-aside>
+    </el-aside>
+    <el-container>
+      <el-header height="80px">
+        <common-header></common-header>
+      </el-header>
+      <el-main style="overflow: hidden;">
+        <router-view/>
+      </el-main>
     </el-container>
+  </el-container>
 </template>
 
 <script>

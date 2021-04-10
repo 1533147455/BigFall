@@ -1,6 +1,5 @@
 <template>
-      <el-row class="home"  :gutter="20">
-        <!-- 左边显示用户信息 -->
+      <el-row class="home" :gutter="20">
         <el-col id="home-left" :span="8">
           <el-card shadow="hover"  style="margin-bottom:20px">
             <div class="user-info">
@@ -10,31 +9,31 @@
               <div id="login-container">
                 <div class="login-info">
                   <p>上次登陆时间：<span>{{ new Date().toLocaleDateString('cn',{hour12:false}) }}</span></p>
-                  <p>上次登录地点： <span>广州</span></p>
+                  <p>上次登录地点：<span>广州</span></p>
                 </div> 
               </div>    
             </div>
           </el-card>
           <el-card shadow="hover" id="left-bottom">
-                  <common-table ref="twoTable"
-                    :height="423"
-                    :table-api="tableApi"
-                    :tableColumns="tableColumns"
-                    :show-pagination="false">
-                    <template #operate="{row}">
-                      <el-button @click="canm(row.id)" type="text" size="medium">查看</el-button>
-                      <el-button type="text" size="medium">编辑</el-button>
-                    </template>
-                  </common-table>
+            <common-table
+              ref="tableDom"
+              :height="423"
+              :table-api="tableApi"
+              :tableColumns="tableColumns"
+              :show-pagination="false">
+              <template #operate="{row}">
+                <el-button @click="canm(row.id)" type="text" size="medium">查看</el-button>
+                <el-button type="text" size="medium">编辑</el-button>
+              </template>
+            </common-table>
           </el-card>
         </el-col>
-        <!-- 右边显示数据 -->
         <el-col id="home-right" :span="16">
             <div class="right-top">
                 <el-card shadow="hover" v-for="item in rightTopData" :key="item.name">
                   <i class="icon" :class="item.icon" :style="{background:item.color}"></i>
                   <div class="detail">
-                    {{ item.name }}{{ item.value }}
+                    <el-link :underline="false" :href="item.url" target="_blank">{{ item.name }}</el-link>
                   </div>
               </el-card>
             </div>
@@ -72,12 +71,12 @@ export default {
       tableApi: HomeApi.getBookTable.bind(HomeApi),
       userImg: require('../assets/images/user.jpg'),
       rightTopData: [
-        { name: '文章数：',value: '12',icon: 'el-icon-star-on',color: '#409eff' },
-        { name: '关注数：',value: '3',icon: 'el-icon-star-on',color: '#409eff' },
-        { name: '粉丝数：',value: '120',icon: 'el-icon-star-on',color: '#409eff' },
-        { name: '阅读量：',value: '1721',icon: 'el-icon-star-on',color: '#409eff' },
-        { name: '点赞量：',value: '432',icon: 'el-icon-star-on',color: '#409eff' },
-        { name: '评论量：',value: '843',icon: 'el-icon-star-on',color: '#409eff' },
+        { name: 'Vue2',url: 'https://vuejs.bootcss.com/guide/',icon: 'el-icon-star-on',color: '#409eff' },
+        { name: 'Vue3',url: 'https://vue3js.cn/',icon: 'el-icon-star-on',color: '#409eff' },
+        { name: 'Element UI',url: 'https://element.eleme.cn/#/zh-CN/component/installation',icon: 'el-icon-star-on',color: '#409eff' },
+        { name: 'MDN',url: 'https://developer.mozilla.org/zh-CN/docs/Web',icon: 'el-icon-star-on',color: '#409eff' },
+        { name: '点赞量：',url: 'https://developer.mozilla.org/zh-CN/docs/Web',icon: 'el-icon-star-on',color: '#409eff' },
+        { name: '评论量：',url: 'https://developer.mozilla.org/zh-CN/docs/Web',icon: 'el-icon-star-on',color: '#409eff' },
       ],
       tableData: [],
       tableColumns: [
@@ -115,14 +114,14 @@ export default {
             type: 'line'
           })
         })
-        this.loading = "false"
+        this.loading = false;
       })
     }
   },
   created() {
     this.getEchartsData();
     this.$nextTick(() => {
-      this.$refs.twoTable.getData();
+      this.$refs.tableDom.getData();
     })
   }
 }
