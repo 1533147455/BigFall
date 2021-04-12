@@ -4,7 +4,6 @@
     :value="displayValue"
     :fetch-suggestions="querySearch"
     clearable
-    style="width: 100%"
     @change="handleInputChange"
     @input="handleInput"
     @select="handleSelect"

@@ -1,22 +1,29 @@
 <template>
-  <el-dialog title="新增" :visible.sync="visible" @close="close" center width="400px">
-    <common-form ref="queryForm" :formItems="formItems" :form="form" label-width="88px"/>
-    <template #footer>
-      <el-button @click="close">取 消</el-button>
-      <el-button type="primary" :loading="confirmLoading" @click="confirm">确 定</el-button>
-    </template>
-  </el-dialog>
+  <div class="page-two">
+    <common-dialog
+        width="430px"
+        title="新增"
+        :visible="visible"
+        :confirm-loading="loading"
+        @close="close"
+        @confirm="confirm">
+      <common-form ref="formDom" :formItems="formItems" :form="form" label-width="88px"/>
+    </common-dialog>
+  </div>
 </template>
 
 <script>
 import CommonForm from "@/components/common/CommonForm";
+import CommonDialog from "@/components/common/CommonDialog"
 export default {
   components: {
-    CommonForm
+    CommonForm,
+    CommonDialog
   },
   data() {
     return{
       visible: false,
+      loading: false,
       form: {},
       formItems: [
         {
@@ -37,18 +44,11 @@ export default {
           ]
         },
         {
-          inputType: 'RemoteInput',
+          inputType: 'el-input',
           formKey: 'dog',
           label: '拉布拉多',
-          staticOptions: [ '三全食品', '四全食品', '五全食品' ]
         },
-      ],
-      confirmLoading: false,
-      rules: {
-        name: [
-          { required: true, message: '请输入名称' }
-        ]
-      }
+      ]
     }
   },
   methods: {
@@ -57,17 +57,15 @@ export default {
     },
     close() {
       this.visible = false;
-      this.$refs.queryForm.$refs.form.resetFields();
+      this.$refs.formDom.$refs.form.resetFields();
     },
     confirm() {
-      console.log(this.form);
-      this.$refs.queryForm.$refs.form.validate((valid) => {
+      this.$refs.formDom.$refs.form.validate((valid) => {
         if (!valid) return;
-        this.confirmLoading = true;
+        this.loading = true;
         setTimeout(() => {
-          this.$emit('updateData');
           this.$message.success('操作成功');
-          this.confirmLoading = false;
+          this.loading = false;
           this.close();
         }, 2000)
       });
@@ -77,7 +75,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-::v-deep .width-form {
-  width: 330px;
-}
+
 </style>

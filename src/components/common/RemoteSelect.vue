@@ -4,7 +4,6 @@
     :value="value"
     v-bind="$attrs"
     v-on="$listeners"
-    style="width: 100%"
     clearable
     filterable>
     <el-option

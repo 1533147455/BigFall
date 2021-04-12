@@ -17,8 +17,8 @@
             v-bind="item"/>
         <!-- 给输入框后面加提示信息等 -->
         <span v-if="item.slotName" style="margin-left: 10px;">
-        <slot :name="item.slotName" :item="item" />
-      </span>
+          <slot :name="item.slotName" :item="item" />
+        </span>
       </el-form-item>
     </el-form>
     <div class="button-slot">

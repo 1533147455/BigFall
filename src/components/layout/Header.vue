@@ -1,5 +1,5 @@
 <template>
- <header>
+  <div class="header">
    <div class="left-content">
     <el-button type="primary" icon="el-icon-menu" size="small"
     @click="isCollapse"></el-button>
@@ -9,16 +9,19 @@
         </el-breadcrumb-item>
     </el-breadcrumb>
   </div>
-  <div class="right-content">
-    <el-dropdown>
-      <img :src="userImg" class="user">
-      <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item>个人中心</el-dropdown-item>
-        <el-dropdown-item @click.native="exit">退出</el-dropdown-item>   
-      </el-dropdown-menu>
-    </el-dropdown>
-  </div>
- </header>
+  <el-dropdown @command="handleCommand">
+    <img :src="userImg" class="user">
+    <el-dropdown-menu slot="dropdown">
+      <el-dropdown-item command="drawer">查看日历</el-dropdown-item>
+      <el-dropdown-item command="exit">退出登录</el-dropdown-item>
+    </el-dropdown-menu>
+  </el-dropdown>
+  <el-drawer
+      :with-header="false"
+      :visible.sync="visible">
+    <el-calendar/>
+  </el-drawer>
+ </div>
     
 </template>
 
@@ -27,8 +30,10 @@ import { mapMutations } from 'vuex'
 export default {
     data() {
       return {
+        visible: false,
         breadList: [],
-        userImg: require('../../assets/images/user.jpg')
+        userImg: require('../../assets/images/user.jpg'),
+        weatherData: []
       }
     },
     watch: {
@@ -42,20 +47,27 @@ export default {
         let matched = this.$route.matched.filter(item => item.meta.title)
          this.breadList = matched
       },
-      exit() {
-        this.clearToken()
-        location.reload()
-      }
+      handleCommand(command) {
+        switch (command) {
+          case 'drawer':
+            this.visible = true;
+            break;
+          case 'exit':
+            this.clearToken();
+            location.reload();
+            break;
+        }
+      },
     },
     created() {
-      this.getBreadList() // 刷新后保持面包屑
+      this.getBreadList(); // 刷新后保持面包屑
     }
 }
 
 </script>
 
 <style lang="scss" scoped>
-header {
+.header {
   display: flex;
   height: 100%;
   justify-content: space-between;
@@ -68,21 +80,14 @@ header {
   }
  
 }
-
-.right-content {
-  
-  .el-dropdown {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    .user {
+.el-dropdown {
+  display: flex;
+  align-items: center;
+  .user {
     width: 40px;
-    height: 40px;
-    border-radius: 50%;    
-    }
+    border-radius: 50%;
   }
-  
-  
 }
+
 
 </style>
