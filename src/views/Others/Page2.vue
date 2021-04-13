@@ -8,7 +8,7 @@
         :confirm-loading="loading"
         @close="close"
         @confirm="confirm">
-      <el-radio-group v-model="updateAll" style="width: 100%;text-align: center;margin-bottom: 20px;" size="small">
+      <el-radio-group v-model="updateAll" @change="radioChange" size="small">
         <el-radio-button :label="false" class="check-data">调整勾选数据</el-radio-button>
         <el-radio-button :label="true" class="all-data">调整全部数据</el-radio-button>
       </el-radio-group>
@@ -65,6 +65,7 @@ export default {
           inputType: 'el-input',
           formKey: 'dog',
           label: '调整为',
+          class: 'afterValue',
           rules: { required: true, message: '请输入调整后的值' },
         },
       ]
@@ -76,6 +77,14 @@ export default {
     },
     init() {
       this.visible = true;
+    },
+    radioChange(value) {
+      this.$refs.formDom.$refs.form.resetFields();
+      if (value) {
+        console.log('点了调整全部按钮')
+      } else {
+        console.log('点了调整勾选按钮')
+      }
     },
     close() {
       this.visible = false;
@@ -97,6 +106,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+::v-deep .el-radio-group {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 20px;
+}
 ::v-deep .el-radio-button:first-child .el-radio-button__inner {
   border-radius: 20px 0 0 20px;
 }
@@ -105,5 +119,8 @@ export default {
 }
 ::v-deep .el-form-item.name .el-input,::v-deep .el-form-item.food .el-input {
   width: 104px;
+}
+::v-deep .el-form-item.afterValue .el-input{
+  width: 243px;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <el-select
     ref="selectDom"
-    :value="value"
+    :value="displayValue"
     v-bind="$attrs"
     v-on="$listeners"
     clearable
@@ -32,9 +32,18 @@ export default {
       }
     }
   },
+  watch: {
+    value: {
+      immediate: true,
+      handler(value) {
+        this.displayValue = value;
+      }
+    }
+  },
   data () {
     return {
-      options: []
+      options: [],
+      displayValue: ''
     }
   },
   methods: {

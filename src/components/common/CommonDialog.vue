@@ -1,6 +1,6 @@
 <template>
     <el-dialog
-        :visible.sync="visible"
+        :visible="visible"
         center
         v-bind="$attrs"
         @close="close">
