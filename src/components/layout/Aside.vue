@@ -54,13 +54,13 @@ export default {
                   icon: 'el-icon-position',
               },
               {
-                  path: '/user',
-                  label: '用户管理',
-                  icon: 'el-icon-s-custom'
-              },
-              {
                 path: '/resume',
                 label: '简历',
+                icon: 'el-icon-s-custom'
+              },
+              {
+                path: '/user',
+                label: '资源',
                 icon: 'el-icon-s-custom'
               },
               {

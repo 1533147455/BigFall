@@ -5,6 +5,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import echarts from 'echarts'
+import '@/assets/scss/common.scss'
 Vue.prototype.$echarts = echarts
 
 import ElementUI from 'element-ui';

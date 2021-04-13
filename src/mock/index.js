@@ -11,5 +11,10 @@ Mock.setup({
 
 
 Mock.mock(/\/home\/getData/,'get',homeApi.getStatisticalData)
-Mock.mock(/\/user\/getUser/,'get',userApi.getUserList)
+Mock.mock(/\/user\/getUser/,'get',userApi.getUserList) // 获取用户列表
 Mock.mock(/\/permission\/getMenu/,'post',permissionApi.getMenu)
+
+Mock.mock(/\/user\/createUser/,'post',userApi.createUser) // 新增用户
+Mock.mock(/\/user\/deleteUser/,'get',userApi.deleteUser) // 删除用户
+Mock.mock(/\/user\/updateUser/,'post',userApi.updateUser) // 新增用户
+

@@ -24,7 +24,7 @@ const routes = [
         path: '/user',
         name: 'user',
         component: () => import('@/views/UserManage.vue'),
-        meta: { title: '用户管理' }
+        meta: { title: '资源' }
       },
       {
         path: '/resume',

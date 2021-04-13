@@ -24,50 +24,66 @@ export default {
     return{
       visible: false,
       loading: false,
-      form: {},
+      form: {
+        name: '',
+        addr: '',
+        age: '',
+        sex: ''
+      },
       formItems: [
         {
-          inputType: 'RemoteInput',
+          inputType: 'el-input',
           formKey: 'name',
           label: '姓名',
-          rules: { required: true, message: '请输入活动名称' },
-          staticOptions: [ '三全食品', '四全食品', '五全食品' ]
-        },
-        {
-          inputType: 'RemoteSelect',
-          formKey: 'food',
-          label: '食物',
-          staticOptions: [
-            { value: '6', label: '六全食品'},
-            { value: '7', label: '七全食品'},
-            { value: '8', label: '八全食品'},
-          ]
+          clearable: true
         },
         {
           inputType: 'el-input',
-          formKey: 'dog',
-          label: '拉布拉多',
+          formKey: 'age',
+          label: '年龄',
+          clearable: true
         },
-      ]
+        {
+          inputType: 'el-input',
+          formKey: 'sex',
+          label: '性别',
+          clearable: true
+        },
+        {
+          inputType: 'el-input',
+          formKey: 'addr',
+          label: '地址',
+          clearable: true
+        }
+      ],
+      path: '/user/createUser',
     }
   },
   methods: {
-    init() {
+    init(row) {
       this.visible = true;
+      if (row) {
+        this.form = Object.assign({}, row)
+        this.path = '/user/updateUser'
+      }
     },
     close() {
       this.visible = false;
-      this.$refs.formDom.$refs.form.resetFields();
+      setTimeout(() => {
+        this.$refs.formDom.$refs.form.resetFields();
+      },200);
     },
     confirm() {
-      this.$refs.formDom.$refs.form.validate((valid) => {
+      this.$refs.formDom.$refs.form.validate(async (valid) => {
         if (!valid) return;
         this.loading = true;
-        setTimeout(() => {
-          this.$message.success('操作成功');
+        await this.$http.post(this.path, this.form).then((res) => {
+          console.log(res);
           this.loading = false;
           this.close();
-        }, 2000)
+          this.$emit('refresh');
+          this.$message.success(res.data?.message);
+        });
       });
     }
   }

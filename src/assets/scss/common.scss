@@ -1,13 +1,28 @@
-.manage{
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  .manage-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-  }
-  .manage-content {
-    overflow: auto;
-  }
+::v-deep .el-dialog--center .el-dialog__body {
+  text-align: initial;
+  padding: 25px 25px 0px;
+}
+
+// 滚动条样式
+::-webkit-scrollbar {
+  width: 8px;
+  background: white;
+}
+::-webkit-scrollbar-corner,
+  /* 滚动条角落 */
+::v-deep .el-table__body-wrapper::-webkit-scrollbar-thumb,
+::v-deep .el-table__body-wrapper::-webkit-scrollbar-track {      /*滚动条的轨道*/
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-corner,
+::-webkit-scrollbar-track {
+  /* 滚动条轨道 */
+  background-color: rgba(180, 160, 120, 0.1);
+  box-shadow: inset 0 0 1px rgba(180, 160, 120, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  /* 滚动条手柄 */
+  background-color: #B3C0D1;
 }

@@ -17,7 +17,6 @@
           <el-card shadow="hover" id="left-bottom" body-style="height: 425px">
             <div style="height: 100%" ref="echarts" :v-loding="loading" id="skill-echarts">
             </div>
-<!--            <echart :chartData="echartsData.order" :v-loading="loading"></echart>-->
           </el-card>
         </el-col>
         <el-col id="home-right" :span="16">
@@ -49,13 +48,10 @@
 </template>
 
 <script>
-// import echarts from 'echarts'
-// import Echarts from '../components/common/EChart'
 import CommonTable from '../components/common/CommonTable'
 import HomeApi from "@/api/home";
 export default {
   components: {
-    // Echart,
     CommonTable
   },
   data() {
@@ -73,81 +69,35 @@ export default {
       ],
       tableData: [],
       tableColumns: [
-        { prop: 'id', label: '编号', width: '55px', align: 'center' },
-        { prop: 'name', label: '书名' },
-        { prop: 'author', label: '作者' },
-        { prop: 'price', label: '价格' }
-      ],
-      echartsData: {
-        order: {
-          xData: [],
-          series: []
-        },
-        user: {
-          xData: [],
-          series: []
-        },
-        video: {
-          series: []
-        }
-      }
+        { prop: 'id', label: '序号', width: '110px', align: 'center' },
+        { prop: 'content', label: '待办事项' },
+        { prop: 'time', label: '时间' },
+        { prop: 'status', label: '状态' }
+      ]
     }
   },
   methods: {
-    // getEchartsData() {
-    //   this.$http.get('/home/getData').then(res => {
-    //       res = res.data
-    //       const order = res.data.orderData
-    //       this.echartsData.order.xData = order.date
-    //       let keyArray = Object.keys(order.data[0])
-    //       keyArray.forEach(key => {
-    //         this.echartsData.order.series.push({
-    //           name: key === 'wechat'?'小程序':key,
-    //           data: order.data.map(item => item[key]),
-    //           type: 'line'
-    //         })
-    //       })
-    //       this.loading = false;
-    //     })
-    // }
     getEchartsData() {
-      debugger;
       const skillEcharts = this.$echarts.init(document.getElementById('skill-echarts'));
         skillEcharts.setOption({
+          title: {
+            text: '结构分布图',
+            left: 'center'
+          },
           tooltip: {
             trigger: 'item'
           },
-          legend: {
-            top: '5%',
-            left: 'center'
-          },
           series: [
             {
-              name: '访问来源',
               type: 'pie',
               radius: ['40%', '70%'],
-              avoidLabelOverlap: false,
-              label: {
-                show: false,
-                position: 'center'
-              },
-              emphasis: {
-                label: {
-                  show: true,
-                  fontSize: '40',
-                  fontWeight: 'bold'
-                }
-              },
-              labelLine: {
-                show: false
-              },
               data: [
-                {value: 246, name: 'HTML5'},
-                {value: 246, name: 'CSS3'},
-                {value: 680, name: 'JavaScript'},
-                {value: 384, name: 'ES6'},
-                {value: 1048, name: 'Vue'},
-                {value: 300, name: '其它'},
+                {value: 58, name: 'HTML'},
+                {value: 82, name: 'CSS'},
+                {value: 186, name: 'JavaScript'},
+                {value: 50, name: 'ES6'},
+                {value: 550, name: 'Vue'},
+                {value: 74, name: '其它'},
               ]
             }
           ]
