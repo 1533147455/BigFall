@@ -118,7 +118,7 @@ export default {
   border-radius: 0 20px 20px 0;
 }
 ::v-deep .el-form-item.name .el-input,::v-deep .el-form-item.food .el-input {
-  width: 104px;
+  width: 110px;
 }
 ::v-deep .el-form-item.afterValue .el-input{
   width: 243px;

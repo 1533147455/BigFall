@@ -32,25 +32,39 @@ export default {
       },
       formItems: [
         {
-          inputType: 'el-input',
+          inputType: 'RemoteInput',
           formKey: 'name',
           label: '姓名',
           clearable: true
         },
         {
-          inputType: 'el-input',
+          inputType: 'NumberInput',
           formKey: 'age',
           label: '年龄',
-          clearable: true
+          clearable: true,
+          min: 0,
+          max: 80
         },
         {
-          inputType: 'el-input',
+          inputType: 'RemoteSelect',
           formKey: 'sex',
           label: '性别',
-          clearable: true
+          clearable: true,
+          staticOptions: [
+            { label: '男', value: 1 },
+            { label: '女', value: 0 }
+          ]
         },
         {
-          inputType: 'el-input',
+          inputType: 'el-date-picker',
+          formKey: 'birth',
+          label: '出生日期',
+          clearable: true,
+          format: 'yyyy-MM-dd',
+          valueFormat: 'yyyy-MM-dd'
+        },
+        {
+          inputType: 'RemoteInput',
           formKey: 'addr',
           label: '地址',
           clearable: true
@@ -66,6 +80,7 @@ export default {
         this.form = Object.assign({}, row)
         this.path = '/user/updateUser'
       }
+      this.form.sex === 0 ? '女' : '男';
     },
     close() {
       this.visible = false;

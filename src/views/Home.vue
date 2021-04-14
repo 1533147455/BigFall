@@ -92,12 +92,12 @@ export default {
               type: 'pie',
               radius: ['40%', '70%'],
               data: [
-                {value: 58, name: 'HTML'},
-                {value: 82, name: 'CSS'},
-                {value: 186, name: 'JavaScript'},
-                {value: 50, name: 'ES6'},
-                {value: 550, name: 'Vue'},
-                {value: 74, name: '其它'},
+                {value: 78, name: 'HTML'},
+                {value: 102, name: 'CSS'},
+                {value: 196, name: 'JavaScript'},
+                {value: 70, name: 'ES6'},
+                {value: 360, name: 'Vue'},
+                {value: 114, name: '其它'},
               ]
             }
           ]

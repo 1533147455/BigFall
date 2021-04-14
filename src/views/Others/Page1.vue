@@ -49,7 +49,7 @@ export default {
         { prop: 'name', label: '姓名' },
         { prop: 'age', label: '年龄' },
         { prop: 'sexLabel', label: '性别' },
-        // { prop: 'birth', label: '出生日期' },
+        { prop: 'birth', label: '出生日期' },
         { prop: 'addr', label: '地址', showOverflowTooltip: true },
         { prop: 'operate', label: '操作', slotName: 'operate',width: "150" }
       ],

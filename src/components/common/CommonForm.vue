@@ -16,7 +16,7 @@
             v-model="form[item.formKey]"
             v-bind="item"/>
         <!-- 给输入框后面加提示信息等 -->
-        <span v-if="item.slotName" style="margin-left: 10px;">
+        <span v-if="item.slotName" style="display: inline-block;margin-left: 10px;">
           <slot :name="item.slotName" :item="item" />
         </span>
       </el-form-item>
