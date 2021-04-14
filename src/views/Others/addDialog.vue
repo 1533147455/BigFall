@@ -1,25 +1,28 @@
 <template>
   <div class="page-two">
-    <common-dialog
+    <base-dialog
         width="430px"
         title="新增"
-        :visible="visible"
+        :visible.sync="visible"
         :confirm-loading="loading"
         @close="close"
         @confirm="confirm">
-      <common-form ref="formDom" :formItems="formItems" :form="form" label-width="88px"/>
-    </common-dialog>
+      <base-form ref="formDom" :formItems="formItems" :form="form" label-width="88px"/>
+    </base-dialog>
   </div>
 </template>
 
 <script>
-import CommonForm from "@/components/common/CommonForm";
-import CommonDialog from "@/components/common/CommonDialog"
+import BaseForm from "@/components/common/BaseForm";
+import BaseDialog from "@/components/common/BaseDialog"
 export default {
   components: {
-    CommonForm,
-    CommonDialog
+    BaseForm,
+    BaseDialog
   },
+  // props: {
+  //   visible: Boolean
+  // },
   data() {
     return{
       visible: false,
@@ -27,7 +30,7 @@ export default {
       form: {
         name: '',
         addr: '',
-        age: '',
+        age: undefined,
         sex: ''
       },
       formItems: [
@@ -73,14 +76,27 @@ export default {
       path: '/user/createUser',
     }
   },
+  // computed: {
+  //   display: {
+  //     get() {
+  //       return this.visible;
+  //     },
+  //     set(val) {
+  //       if (!val) {
+  //         this.$emit('update:visible', false);
+  //       }
+  //     }
+  //   }
+  // },
   methods: {
     init(row) {
       this.visible = true;
       if (row) {
-        this.form = Object.assign({}, row)
+        // this.form = Object.assign({}, row)
+        this.form = { ...row }
+        this.form.sex === 0 ? '女' : '男'
         this.path = '/user/updateUser'
       }
-      this.form.sex === 0 ? '女' : '男';
     },
     close() {
       this.visible = false;

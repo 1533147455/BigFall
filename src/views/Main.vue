@@ -1,11 +1,11 @@
 <template>
   <el-container style="height: 100%">
     <el-aside width="auto">
-      <common-aside></common-aside>
+      <the-aside></the-aside>
     </el-aside>
     <el-container>
       <el-header height="80px">
-        <common-header></common-header>
+        <the-header></the-header>
       </el-header>
       <el-main style="overflow: hidden;">
         <router-view/>
@@ -15,13 +15,13 @@
 </template>
 
 <script>
-import CommonHeader from '../components/layout/Header.vue'
-import CommonAside from '../components/layout/Aside.vue'
+import TheHeader from '../components/layout/TheHeader.vue'
+import TheAside from '../components/layout/TheAside.vue'
 
 export default {
     components: {
-        CommonHeader,
-        CommonAside
+      TheHeader,
+      TheAside
     }
 }
 </script>

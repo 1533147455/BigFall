@@ -1,7 +1,7 @@
 <template>
   <div class="page-two">
     <el-button type="primary" plain @click="batchAdjust">批量调整</el-button>
-    <common-dialog
+    <base-dialog
         width="430px"
         title="批量调整"
         :visible="visible"
@@ -12,25 +12,25 @@
         <el-radio-button :label="false" class="check-data">调整勾选数据</el-radio-button>
         <el-radio-button :label="true" class="all-data">调整全部数据</el-radio-button>
       </el-radio-group>
-      <common-form ref="formDom" :formItems="formItems" :form="form" inline label-width="65px">
+      <base-form ref="formDom" :formItems="formItems" :form="form" inline label-width="65px">
         <template #nameDescribe="{item}">
           {{ item.describe }}
         </template>
         <template #foodDescribe="{item}">
           {{ item.describe }}
         </template>
-      </common-form>
-    </common-dialog>
+      </base-form>
+    </base-dialog>
   </div>
 </template>
 
 <script>
-import CommonForm from "@/components/common/CommonForm";
-import CommonDialog from "@/components/common/CommonDialog"
+import BaseForm from "@/components/common/BaseForm";
+import BaseDialog from "@/components/common/BaseDialog"
 export default {
   components: {
-    CommonForm,
-    CommonDialog
+    BaseForm,
+    BaseDialog
   },
   data() {
     return{

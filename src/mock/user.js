@@ -42,7 +42,9 @@ export default {
     const { name, currentPage, pageSize } = param2Obj(config.url)
     console.log('name:' + name, 'currentPage:' + currentPage, 'pageSize:' + pageSize)
     const mockList = List.filter(user => {
-      if (name && user.name.indexOf(name) === -1 && user.addr.indexOf(name) === -1) return false
+      if (name && user.name.indexOf(name) === -1) {
+        return false
+      }
       return true
     })
     const pageList = mockList.filter((item, index) => index < pageSize * currentPage && index >= pageSize * (currentPage - 1))

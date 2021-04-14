@@ -15,7 +15,7 @@
           <p>学历：<span>本科</span></p>
         </div>
       </el-card>
-      <el-card id="skill-card" shadow="hover" body-style="height: 236px">
+      <el-card id="skill-card" shadow="hover" body-style="height: 252px">
         <div slot="header" class="clearfix">
           <span class="card-title">掌握技能</span>
 <!--/*          <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>*/-->

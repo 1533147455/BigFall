@@ -1,9 +1,9 @@
 <template>
   <div class="page-one">
-    <query-form :formItems="formItems" :form="form" inline>
+    <base-form :formItems="formItems" :form="form" inline>
       <el-button type="primary" @click="getTableData">查询</el-button>
-      <el-button type="primary" plain @click="add">新增</el-button>
-    </query-form>
+      <el-button type="primary" plain @click="add(null)">新增</el-button>
+    </base-form>
     <add-dialog ref="addDialog" @refresh="getTableData"></add-dialog>
     <common-table
         :height="614"
@@ -21,12 +21,12 @@
 </template>
 
 <script>
-import QueryForm from "@/components/common/CommonForm";
+import BaseForm from "@/components/common/BaseForm";
 import AddDialog from "@/views/Others/addDialog";
 import CommonTable from '../../components/common/Table';
 export default {
   components: {
-    QueryForm,
+    BaseForm,
     AddDialog,
     CommonTable
   },
@@ -58,6 +58,7 @@ export default {
   },
   methods: {
     add(row) {
+      // this.visible = true;
       this.$refs.addDialog.init(row);
     },
     remove(row) {
