@@ -13,13 +13,14 @@ export default {
 <style lang="scss" scoped>
 .blog {
   height: 100%;
-  position: relative;
+  margin: -20px;
+  //position: relative;
   .iframe {
-    height: 112%;
+    height: 100%;
     width: 100%;
-    position: absolute;
-    top: -77px;
     border: 0;
+    //position: absolute;
+    //top: -77px;
   }
 }
 </style>

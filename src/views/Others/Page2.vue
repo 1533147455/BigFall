@@ -1,58 +1,82 @@
 <template>
   <div class="page-two">
-    <el-button type="primary" plain @click="batchAdjust">批量调整</el-button>
-    <base-dialog
-        width="430px"
-        title="批量调整"
-        :visible="visible"
-        :confirm-loading="loading"
-        @close="close"
-        @confirm="confirm">
-      <el-radio-group v-model="updateAll" @change="radioChange" size="small">
-        <el-radio-button :label="false" class="check-data">调整勾选数据</el-radio-button>
-        <el-radio-button :label="true" class="all-data">调整全部数据</el-radio-button>
-      </el-radio-group>
-      <base-form ref="formDom" :formItems="formItems" :form="form" inline label-width="65px">
-        <template #nameDescribe="{item}">
-          {{ item.describe }}
-        </template>
-        <template #foodDescribe="{item}">
-          {{ item.describe }}
-        </template>
-      </base-form>
-    </base-dialog>
+    <el-button type="primary" plain @click="init">批量调整</el-button>
+    <batch-adjust-dialog
+      :visible="visible"
+      :confirm-loading="confirmLoading"
+      :selection="selection"
+      @radioChange="radioChange"
+      @close="close"
+      @confirm="confirm">
+      <template #form>
+        <base-form ref="checkFormDom" :formItems="checkFormItems" :form="checkForm" inline label-width="65px" v-show="!adjustAll">
+        </base-form>
+        <base-form ref="allFormDom" :formItems="allFormItems" :form="allForm" inline label-width="65px" v-show="adjustAll">
+          <template #nameDescribe="{item}">
+            {{ item.describe }}
+          </template>
+          <template #foodDescribe="{item}">
+            {{ item.describe }}
+          </template>
+        </base-form>
+      </template>
+    </batch-adjust-dialog>
   </div>
 </template>
 
 <script>
 import BaseForm from "@/components/common/BaseForm";
-import BaseDialog from "@/components/common/BaseDialog"
+import BatchAdjustDialog from "@/views/Others/BatchAdjustDialog";
 export default {
   components: {
+    BatchAdjustDialog,
     BaseForm,
-    BaseDialog
   },
   data() {
     return{
       visible: false,
-      loading: false,
-      updateAll: true,
-      form: {},
-      formItems: [
+      confirmLoading: false,
+      adjustAll: true,
+      selection: [2], // 接收要调整的id数组
+      checkForm: {},
+      checkFormItems: [
+        {
+          inputType: 'RemoteSelect',
+          label: '属性',
+          formKey: 'checkFormOption',
+          class: 'checkFormOption',
+          staticOptions: [
+            { value: '6', label: '车品牌'},
+            { value: '7', label: '车系'},
+            { value: '8', label: '车型'},
+            { value: '9', label: '备注'},
+            { value: '10', label: '线上备注'}
+          ]
+        },
+        {
+          inputType: 'el-input',
+          formKey: 'checkFormValue',
+          class: 'checkFormValue',
+          label: '调整为',
+          rules: { required: true, message: '请输入调整后的值' },
+        },
+      ],
+      allForm: {},
+      allFormItems: [
         {
           inputType: 'RemoteInput',
           formKey: 'name',
           label: '属性',
-          class: 'name',
+          class: 'allFormOption',
           rules: { required: true, message: '请输入需要调整的属性' },
-          staticOptions: [ '三全食品', '四全食品', '五全食品' ],
+          staticOptions: [ '车品牌', '车系', '车型', '备注', '线上备注' ],
           slotName: 'nameDescribe',
           describe: '='
         },
         {
           inputType: 'RemoteSelect',
           formKey: 'food',
-          class: 'food',
+          class: 'allFormBeforeValue',
           staticOptions: [
             { value: '6', label: '六全食品'},
             { value: '7', label: '七全食品'},
@@ -65,47 +89,48 @@ export default {
           inputType: 'el-input',
           formKey: 'dog',
           label: '调整为',
-          class: 'afterValue',
+          class: 'allFormAfterValue',
           rules: { required: true, message: '请输入调整后的值' },
         },
       ]
     }
   },
   methods: {
-    batchAdjust() {
-      this.init();
-    },
     init() {
-      this.visible = true;
+      this.visible = true
     },
     radioChange(value) {
-      this.$refs.formDom.$refs.form.resetFields();
-      if (value) {
-        console.log('点了调整全部按钮')
-      } else {
-        console.log('点了调整勾选按钮')
-      }
+      this.adjustAll = value
+      this.$refs.checkFormDom.$refs.form.clearValidate() // 切换时清除将离开的表单的校验
+      this.$refs.allFormDom.$refs.form.clearValidate()
+
     },
     close() {
-      this.visible = false;
-      this.$refs.formDom.$refs.form.resetFields();
+      this.visible = false
+      setTimeout(() => {
+        this.$refs.checkFormDom.$refs.form.resetFields()
+        this.$refs.allFormDom.$refs.form.resetFields()
+      })
     },
     confirm() {
-      this.$refs.formDom.$refs.form.validate((valid) => {
-        if (!valid) return;
-        this.loading = true;
+      const formName = this.adjustAll ? 'allFormDom' : 'checkFormDom'
+      this.$refs[formName].$refs.form.validate((valid) => {
+        if (!valid) return
+        this.confirmLoading = true
         setTimeout(() => {
-          this.$message.success('操作成功');
-          this.loading = false;
-          this.close();
+          this.$emit('refresh')
+          this.$message.success('操作成功')
+          this.confirmLoading = false
+          this.close()
         }, 2000)
-      });
+      })
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+// 按钮
 ::v-deep .el-radio-group {
   width: 100%;
   text-align: center;
@@ -117,10 +142,18 @@ export default {
 ::v-deep .el-radio-button:last-child .el-radio-button__inner {
   border-radius: 0 20px 20px 0;
 }
-::v-deep .el-form-item.name .el-input,::v-deep .el-form-item.food .el-input {
+// 调整勾选数据
+::v-deep .checkFormOption,::v-deep .checkFormValue{
+  width: 250px;
+}
+.not-allowed ::v-deep .el-radio-button__inner {
+  cursor: not-allowed; // 当没勾选数据时，调整勾选数据按钮改用禁用光标
+}
+// 调整全部数据
+::v-deep .allFormBeforeValue,::v-deep .allFormOption {
   width: 110px;
 }
-::v-deep .el-form-item.afterValue .el-input{
-  width: 243px;
+::v-deep .allFormAfterValue{
+  width: 250px;
 }
 </style>

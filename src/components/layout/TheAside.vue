@@ -58,11 +58,11 @@ export default {
                 label: '简历',
                 icon: 'el-icon-s-custom'
               },
-              {
-                path: '/user',
-                label: '资源',
-                icon: 'el-icon-s-custom'
-              },
+              // {
+              //   path: '/user',
+              //   label: '资源',
+              //   icon: 'el-icon-s-custom'
+              // },
               {
                   path: '/others',
                   label: '其它',

@@ -29,7 +29,7 @@ export default {
 <style lang="scss" scoped>
 
 .el-header {
-    background-color: #B3C0D1;
+    background-color: #e7f2f9;
     color: #333;
 }
 

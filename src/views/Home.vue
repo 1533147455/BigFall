@@ -3,13 +3,13 @@
         <el-col id="home-left" :span="8">
           <el-card shadow="hover"  style="margin-bottom:20px">
             <div class="user-info">
-              <img :src="userImg">
+              <img :src="require('../assets/images/user.jpg')">
               <p class="user-name">灯火可亲</p>
               <p class="user-access">Love the process，not the goal.</p>
               <div id="login-container">
                 <div class="login-info">
-                  <p>上次登陆时间：<span>{{ new Date().toLocaleDateString('cn',{hour12:false}) }}</span></p>
-                  <p>上次登录地点：<span>广州</span></p>
+                  <p>最近登陆时间：<span>{{ new Date().toLocaleDateString('cn',{hour12:false}) }}</span></p>
+                  <p>最近登录地点：<span>广州</span></p>
                 </div> 
               </div>    
             </div>
@@ -20,25 +20,36 @@
           </el-card>
         </el-col>
         <el-col id="home-right" :span="16">
+          <el-card class="box-card" style="margin-bottom: 20px;height: 250px">
+            <div slot="header" class="clearfix">
+              <span>技术社区</span>
+            </div>
             <div class="right-top">
-                <el-card shadow="hover" v-for="item in rightTopData" :key="item.name">
-                  <i class="icon" :class="item.icon" :style="{background:item.color}"></i>
-                  <div class="detail">
-                    <el-link :underline="false" :href="item.url" target="_blank">{{ item.name }}</el-link>
-                  </div>
+              <el-card v-for="item in rightTopData" :key="item.name" shadow="never">
+                <img :src="item.src">
+                <div class="detail">
+                  <el-link :underline="false" :href="item.url" target="_blank">{{ item.name }}</el-link>
+                </div>
               </el-card>
             </div>
+          </el-card>
           <div class="right-middle">
-            <el-card shadow="hover" body-style="height: 529px" >
+            <el-card shadow="hover" body-style="height: 466px;padding:10px 20px" >
+              <div slot="header" class="clearfix">
+                <span>资料文档</span>
+              </div>
               <base-table
                   ref="tableDom"
-                  :height="530"
+                  :height="461"
                   :table-api="tableApi"
                   :tableColumns="tableColumns"
+                  :show-header="false"
                   :show-pagination="false">
-                <template #operate="{row}">
-                  <el-button @click="canm(row.id)" type="text" size="medium">查看</el-button>
-                  <el-button type="text" size="medium">编辑</el-button>
+                <template #url="{ row }">
+                  <el-link :href="row.url" target="_blank" :underline="false">{{ row.name }}</el-link>
+                </template>
+                <template #urlRight="{ row }">
+                  <el-link :href="row.urlRight" target="_blank" :underline="false">{{ row.nameRight }}</el-link>
                 </template>
               </base-table>
             </el-card>
@@ -57,22 +68,23 @@ export default {
   data() {
     return {
       loading: true,
-      tableApi: HomeApi.getBookTable.bind(HomeApi),
-      userImg: require('../assets/images/user.jpg'),
+      tableApi: HomeApi.getResource.bind(HomeApi),
       rightTopData: [
-        { name: 'Vue2',url: 'https://vuejs.bootcss.com/guide/',icon: 'el-icon-star-on',color: '#409eff' },
-        { name: 'Vue3',url: 'https://vue3js.cn/',icon: 'el-icon-star-on',color: '#409eff' },
-        { name: 'Element UI',url: 'https://element.eleme.cn/#/zh-CN/component/installation',icon: 'el-icon-star-on',color: '#409eff' },
-        { name: 'MDN',url: 'https://developer.mozilla.org/zh-CN/docs/Web',icon: 'el-icon-star-on',color: '#409eff' },
-        { name: '点赞量：',url: 'https://developer.mozilla.org/zh-CN/docs/Web',icon: 'el-icon-star-on',color: '#409eff' },
-        { name: '评论量：',url: 'https://developer.mozilla.org/zh-CN/docs/Web',icon: 'el-icon-star-on',color: '#409eff' },
+        { name: '掘金',url: 'https://juejin.cn/', src: require('../assets/images/home/juejin.png') },
+        { name: 'SF思否',url: 'https://segmentfault.com/', src: require('../assets/images/home/sf.png') },
+        { name: '菜鸟教程',url: 'https://www.runoob.com/', src: require('../assets/images/home/cn.png') },
+        { name: 'W3school',url: 'https://www.w3school.com.cn/', src: require('../assets/images/home/w3.png') },
+        { name: '慕课网',url: 'https://www.imooc.com/', src: require('../assets/images/home/imooc.png') },
+        { name: '简书',url: 'https://www.jianshu.com/p/a7550c0e164f', src: require('../assets/images/home/jian.png') },
+        { name: 'CSDN',url: 'https://www.csdn.net/', src: require('../assets/images/home/csdn.png') },
+        { name: '51CTO',url: 'https://www.51cto.com/', src: require('../assets/images/home/51.png') }
       ],
       tableData: [],
       tableColumns: [
-        { prop: 'id', label: '序号', width: '110px', align: 'center' },
-        { prop: 'content', label: '待办事项' },
-        { prop: 'time', label: '时间' },
-        { prop: 'status', label: '状态' }
+        { prop: 'category', label: '分类', align: 'center', width: '100px' },
+        { prop: 'name', label: '官方文档', slotName: 'url', align: 'center' },
+        { prop: 'categoryRight', label: '分类', align: 'center', width: '100px' },
+        { prop: 'nameRight', label: '官方文档', slotName: 'urlRight', align: 'center' }
       ]
     }
   },

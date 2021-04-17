@@ -48,8 +48,8 @@ export default {
       tableColumns: [
         { prop: 'name', label: '姓名' },
         { prop: 'age', label: '年龄' },
-        { prop: 'sexLabel', label: '性别' },
-        { prop: 'birth', label: '出生日期' },
+        { prop: 'sex', label: '性别' },
+        { prop: 'birth', label: '日期' },
         { prop: 'addr', label: '地址', showOverflowTooltip: true },
         { prop: 'operate', label: '操作', slotName: 'operate',width: "150" }
       ],
@@ -58,8 +58,8 @@ export default {
   },
   methods: {
     add(row) {
-      // this.visible = true;
-      this.$refs.addDialog.init(row);
+      // this.visible = true
+      this.$refs.addDialog.init(row)
     },
     remove(row) {
       this.$confirm(`删除用户${row.name}, 是否继续?`, '提示', {
@@ -89,10 +89,12 @@ export default {
           name: this.form.name
         }
       }).then(res => {
-        this.tableData = res.data.list.map(item => {
-          item.sexLabel = item.sex === 0 ? '女' : '男'
-          return item
-        })
+        // this.tableData = res.data.list.map(item => {
+        //   item.sexLabel = item.sex === 0 ? '女' : '男'
+        //   return item
+        // })
+        console.log(res)
+        this.tableData = res.data.list
         this.config.total = res.data.total
         this.config.loading = false
       })

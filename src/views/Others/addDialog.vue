@@ -31,14 +31,15 @@ export default {
         name: '',
         addr: '',
         age: undefined,
-        sex: ''
+        sex: '',
+        birth: ''
       },
       formItems: [
         {
           inputType: 'RemoteInput',
           formKey: 'name',
           label: '姓名',
-          clearable: true
+          clearable: true,
         },
         {
           inputType: 'NumberInput',
@@ -54,14 +55,14 @@ export default {
           label: '性别',
           clearable: true,
           staticOptions: [
-            { label: '男', value: 1 },
-            { label: '女', value: 0 }
+            { label: '男', value: '男' },
+            { label: '女', value: '女' }
           ]
         },
         {
           inputType: 'el-date-picker',
           formKey: 'birth',
-          label: '出生日期',
+          label: '日期',
           clearable: true,
           format: 'yyyy-MM-dd',
           valueFormat: 'yyyy-MM-dd'
@@ -76,29 +77,16 @@ export default {
       path: '/user/createUser',
     }
   },
-  // computed: {
-  //   display: {
-  //     get() {
-  //       return this.visible;
-  //     },
-  //     set(val) {
-  //       if (!val) {
-  //         this.$emit('update:visible', false);
-  //       }
-  //     }
-  //   }
-  // },
   methods: {
     init(row) {
       this.visible = true;
       if (row) {
         // this.form = Object.assign({}, row)
         this.form = { ...row }
-        this.form.sex === 0 ? '女' : '男'
-        this.path = '/user/updateUser'
       }
     },
     close() {
+      // this.$emit('update:visible', false);
       this.visible = false;
       setTimeout(() => {
         this.$refs.formDom.$refs.form.resetFields();
@@ -109,7 +97,6 @@ export default {
         if (!valid) return;
         this.loading = true;
         await this.$http.post(this.path, this.form).then((res) => {
-          console.log(res);
           this.loading = false;
           this.close();
           this.$emit('refresh');

@@ -9,10 +9,11 @@
           v-for="item in formItems"
           :key="item.formKey"
           :prop="item.formKey"
+          :class="item.formKey + 'Item'"
           v-bind="item">
         <component
             :is="item.inputType"
-            ref="formComponents"
+            ref="formItemsDom"
             v-model="form[item.formKey]"
             v-bind="item"/>
         <!-- 给输入框后面加提示信息等 -->
