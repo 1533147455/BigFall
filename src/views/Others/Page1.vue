@@ -21,12 +21,10 @@
 </template>
 
 <script>
-import BaseForm from "@/components/common/BaseForm";
 import AddDialog from "@/views/Others/addDialog";
 import CommonTable from '../../components/common/Table';
 export default {
   components: {
-    BaseForm,
     AddDialog,
     CommonTable
   },

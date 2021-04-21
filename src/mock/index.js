@@ -10,7 +10,7 @@ Mock.setup({
 })
 
 
-Mock.mock(/\/home\/getData/,'get',homeApi.getStatisticalData)
+Mock.mock(/\/test\/lineChart/,'get',homeApi.getStatisticalData)
 
 Mock.mock(/\/permission\/getMenu/,'post',permissionApi.getMenu)
 

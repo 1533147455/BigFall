@@ -52,6 +52,12 @@ const routes = [
             meta: { title: '起起落落' }
           }
         ]
+      },
+      {
+        path: '/test',
+        name: 'test',
+        component: () => import('@/views/Test'),
+        meta: { title: 'Test' }
       }
     ]
   },

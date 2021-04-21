@@ -24,7 +24,7 @@ export default {
     },
     computed: {
         ...mapState(['isCollapse']),
-        options() {
+        option() {
             return this.isAxisChart?this.axisOption : this.normalOption
         }
         
@@ -64,10 +64,10 @@ export default {
         initChart() {
             this.initChartData()
             if (this.echart) {
-                this.echart.setOption(this.options)
+                this.echart.setOption(this.option)
             } else {
                 this.echart = echart.init(this.$refs.echart)
-                this.echart.setOption(this.options)                
+                this.echart.setOption(this.option)
             }
         },
         initChartData() {

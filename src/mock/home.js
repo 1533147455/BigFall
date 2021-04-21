@@ -12,7 +12,7 @@ export default {
           ES6: Mock.Random.float(100, 8000, 0, 2),
           Redis: Mock.Random.float(100, 8000, 0, 2),
           React: Mock.Random.float(100, 8000, 0, 2),
-          springboot: Mock.Random.float(100, 8000, 0, 2)
+          springBoot: Mock.Random.float(100, 8000, 0, 2)
         })
       )
     }
@@ -20,7 +20,7 @@ export default {
       code: 20000,
       data: {
         // 饼图
-        videoData: [
+        pieChart: [
           {
             name: 'HTML5',
             value: Mock.Random.float(1000, 10000, 0, 2)
@@ -47,7 +47,7 @@ export default {
           }
         ],
         // 柱状图
-        userData: [
+        barChart: [
           {
             date: '周一',
             new: Mock.Random.integer(1, 100),
@@ -85,8 +85,8 @@ export default {
           }
         ],
         // 折线图
-        orderData: {
-          date: ['20191001', '20191002', '20191003', '20191004', '20191005', '20191006', '20191007'],
+        lineChart: {
+          date: ['2020-10', '2020-11', '2020-12', '2021-01', '2021-02', '2021-03', '2021-04'],
           data: List
         },
         tableData: [

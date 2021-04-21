@@ -59,12 +59,8 @@
 </template>
 
 <script>
-import BaseTable from '../components/common/BaseTable'
 import HomeApi from "@/api/home";
 export default {
-  components: {
-    BaseTable
-  },
   data() {
     return {
       loading: true,

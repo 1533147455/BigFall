@@ -13,13 +13,7 @@
 </template>
 
 <script>
-import BaseForm from "@/components/common/BaseForm";
-import BaseDialog from "@/components/common/BaseDialog"
 export default {
-  components: {
-    BaseForm,
-    BaseDialog
-  },
   // props: {
   //   visible: Boolean
   // },

@@ -25,12 +25,10 @@
 </template>
 
 <script>
-import BaseForm from "@/components/common/BaseForm";
 import BatchAdjustDialog from "@/views/Others/BatchAdjustDialog";
 export default {
   components: {
     BatchAdjustDialog,
-    BaseForm,
   },
   data() {
     return{

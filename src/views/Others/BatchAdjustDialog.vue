@@ -22,11 +22,7 @@
 </template>
 
 <script>
-import BaseDialog from "@/components/common/BaseDialog"
 export default {
-  components: {
-    BaseDialog
-  },
   props: {
     showRadioGroup: {
       type: Boolean,
