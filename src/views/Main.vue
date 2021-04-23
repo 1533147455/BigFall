@@ -7,7 +7,7 @@
       <el-header height="80px">
         <the-header></the-header>
       </el-header>
-      <el-main style="overflow: hidden;">
+      <el-main>
         <router-view/>
       </el-main>
     </el-container>
