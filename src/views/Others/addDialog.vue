@@ -28,16 +28,19 @@ export default {
         sex: '',
         birth: ''
       },
+      cloneForm: { ...this.form },
       formItems: [
         {
           inputType: 'RemoteInput',
           formKey: 'name',
+          prop: 'name',
           label: '姓名',
           clearable: true,
         },
         {
           inputType: 'NumberInput',
           formKey: 'age',
+          prop: 'age',
           label: '年龄',
           clearable: true,
           min: 0,
@@ -46,6 +49,7 @@ export default {
         {
           inputType: 'RemoteSelect',
           formKey: 'sex',
+          prop: 'sex',
           label: '性别',
           clearable: true,
           staticOptions: [
@@ -56,6 +60,7 @@ export default {
         {
           inputType: 'el-date-picker',
           formKey: 'birth',
+          prop: 'birth',
           label: '日期',
           clearable: true,
           format: 'yyyy-MM-dd',
@@ -64,6 +69,7 @@ export default {
         {
           inputType: 'RemoteInput',
           formKey: 'addr',
+          prop: 'addr',
           label: '地址',
           clearable: true
         }
@@ -74,17 +80,23 @@ export default {
   methods: {
     init(row) {
       this.visible = true;
-      if (row) {
-        // this.form = Object.assign({}, row)
-        this.form = { ...row }
-      }
+      this.$nextTick(() => {
+        if (row) {
+          this.path = '/user/updateUser'
+          // this.form = Object.assign({}, row)
+          this.form = { ...row }
+        }
+      })
     },
     close() {
       // this.$emit('update:visible', false);
-      this.visible = false;
+      this.visible = false
+      this.path = '/user/createUser'
       setTimeout(() => {
         this.$refs.formDom.$refs.form.resetFields();
+        // this.form = this.cloneForm;
       },200);
+      console.log(this.form);
     },
     confirm() {
       this.$refs.formDom.$refs.form.validate(async (valid) => {
@@ -94,7 +106,7 @@ export default {
           this.loading = false;
           this.close();
           this.$emit('refresh');
-          this.$message.success(res.data?.message);
+          this.$message.success(res.data.data?.message);
         });
       });
     }

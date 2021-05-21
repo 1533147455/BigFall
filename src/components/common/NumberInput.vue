@@ -1,67 +1,19 @@
 <template>
-  <div
-      @dragstart.prevent
-      :class="[
-      'number-input',
-      { 'is-disabled': inputNumberDisabled },
-    ]">
-    <el-input
-        ref="input"
-        :value="displayValue"
-        :placeholder="placeholder"
-        :disabled="inputNumberDisabled"
-        :max="max"
-        :min="min"
-        :name="name"
-        :label="label"
-        clearable
-        @blur="handleBlur"
-        @focus="handleFocus"
-        @input="handleInput"
-        @change="handleInputChange">
-    </el-input>
-  </div>
+  <el-input
+      ref="input"
+      :value="displayValue"
+      clearable
+      v-bind="$attrs"
+      v-on="$listeners"
+      @input="handleInput"
+      @change="handleInputChange">
+  </el-input>
 </template>
 <script>
-import ElInput from 'element-ui/packages/input';
-import Focus from 'element-ui/src/mixins/focus';
-import RepeatClick from 'element-ui/src/directives/repeat-click';
-
 export default {
   name: 'NumberInput',
-  mixins: [Focus('input')],
-  inject: {
-    elForm: {
-      default: ''
-    },
-    elFormItem: {
-      default: ''
-    }
-  },
-  directives: {
-    repeatClick: RepeatClick
-  },
-  components: {
-    ElInput
-  },
   props: {
-    max: {
-      type: Number,
-      default: Infinity
-    },
-    min: {
-      type: Number,
-      default: -Infinity
-    },
     value: {},
-    disabled: Boolean,
-    size: String,
-    name: String,
-    label: {
-      type: String,
-      default: '输入'
-    },
-    placeholder: String,
     precision: {
       type: Number,
       validator(val) {
@@ -89,14 +41,6 @@ export default {
             newVal = this.toPrecision(newVal, this.precision);
           }
         }
-        if (newVal > this.max) {
-          this.$message.warning(`${this.label}的值不能大于${this.max}`);
-          newVal = this.max ;
-        }
-        if (newVal < this.min) {
-          this.$message.warning(`${this.label}的值不能小于${this.min}`);
-          newVal = this.min;
-        }
         this.currentValue = newVal;
         this.userInput = null;
         this.$emit('input', newVal);
@@ -116,14 +60,9 @@ export default {
         return Math.max(getPrecision(value), stepPrecision);
       }
     },
-    _elFormItemSize() {
-      return (this.elFormItem || {}).elFormItemSize;
-    },
-    inputNumberDisabled() {
-      return this.disabled || !!(this.elForm || {}).disabled;
-    },
+
     displayValue() {
-      if (this.userInput !== null) {
+      if (this.userInput !== null) { // 用户有输入就展示输入值
         return this.userInput;
       }
 
@@ -133,19 +72,13 @@ export default {
         currentValue = currentValue.toFixed(this.precision);
       }
 
-      return currentValue;
+      return currentValue; // 没有的话就是初始值
     }
   },
   methods: {
     toPrecision(num, precision) {
       if (precision === undefined) precision = this.numPrecision;
       return parseFloat(Math.round(num * Math.pow(10, precision)) / Math.pow(10, precision));
-    },
-    handleBlur(event) {
-      this.$emit('blur', event);
-    },
-    handleFocus(event) {
-      this.$emit('focus', event);
     },
     setCurrentValue(newVal) {
       const oldVal = this.currentValue;
@@ -178,25 +111,8 @@ export default {
       }
       this.userInput = null;
     }
-  },
-  mounted() {
-    let innerInput = this.$refs.input.$refs.input;
-    innerInput.setAttribute('role', 'spinbutton');
-    innerInput.setAttribute('aria-valuemax', this.max);
-    innerInput.setAttribute('aria-valuemin', this.min);
-    innerInput.setAttribute('aria-valuenow', this.currentValue);
-    innerInput.setAttribute('aria-disabled', this.inputNumberDisabled);
-  },
-  updated() {
-    if (!this.$refs || !this.$refs.input) return;
-    const innerInput = this.$refs.input.$refs.input;
-    innerInput.setAttribute('aria-valuenow', this.currentValue);
   }
 };
 </script>
 <style lang="scss" scoped>
-.el-input-number ::v-deep .el-input__inner {
-  padding: 0 15px;
-  text-align: left;
-}
 </style>

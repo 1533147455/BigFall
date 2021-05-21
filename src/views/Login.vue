@@ -40,7 +40,7 @@ export default {
                     this.setToken(res.data.token)
                     this.$router.push( {name: 'index'} )
                 } else {
-                    this.$message.warning(res.data.message)
+                    this.$message.error(res.data.message)
                 }
             })
         },

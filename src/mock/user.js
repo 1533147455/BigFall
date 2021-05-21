@@ -74,7 +74,7 @@ export default {
     return {
       code: 20000,
       data: {
-        message: '添加成功'
+        message: '新增成功'
       }
     }
   },
@@ -121,14 +121,13 @@ export default {
    */
   updateUser: config => {
     const { id, name, addr, age, birth, sex } = JSON.parse(config.body)
-    const sex_num = parseInt(sex)
     List.some(u => {
       if (u.id === id) {
         u.name = name
         u.addr = addr
         u.age = age
         u.birth = birth
-        u.sex = sex_num
+        u.sex = sex
         return true
       }
     })

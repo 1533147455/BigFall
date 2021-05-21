@@ -43,7 +43,6 @@
                   :height="461"
                   :table-api="tableApi"
                   :tableColumns="tableColumns"
-                  :show-header="false"
                   :show-pagination="false">
                 <template #url="{ row }">
                   <el-link :href="row.url" target="_blank" :underline="false">{{ row.name }}</el-link>
@@ -77,10 +76,10 @@ export default {
       ],
       tableData: [],
       tableColumns: [
-        { prop: 'category', label: '分类', align: 'center', width: '100px' },
-        { prop: 'name', label: '官方文档', slotName: 'url', align: 'center' },
-        { prop: 'categoryRight', label: '分类', align: 'center', width: '100px' },
-        { prop: 'nameRight', label: '官方文档', slotName: 'urlRight', align: 'center' }
+        { prop: 'category', label: '第一列', align: 'center' },
+        { prop: 'name', label: '第二列', slotName: 'url' },
+        { prop: 'categoryRight', label: '第三列'},
+        { prop: 'nameRight', label: '第四列', slotName: 'urlRight' }
       ]
     }
   },
@@ -115,7 +114,7 @@ export default {
   },
   created() {
     this.$nextTick(() => {
-      this.$refs.tableDom.getData();
+      this.$refs.tableDom.getTableData();
     })
   },
   mounted() {
